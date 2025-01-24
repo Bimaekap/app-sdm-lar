@@ -23,7 +23,7 @@ class CutiManagementController extends Controller
     {
         return view('admin.contents.cuti-management.page-pengajuan-cuti');
     }
-
+    
     public function formubahcuti()
     {
         $kategoriCuti = KategoriCuti::get()->all();
