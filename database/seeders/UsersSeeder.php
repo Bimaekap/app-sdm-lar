@@ -18,6 +18,7 @@ class UsersSeeder extends Seeder
             'name' => 'superadmin',
             'role' => 'superadmin',
             'email' => 'superadmin@gmail.com',
+            'status_validasi' => 0,
             'password' => Hash::make('password'),
         ]);
     }

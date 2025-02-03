@@ -4,12 +4,12 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\CutiUser;
+use App\Models\validasiCutiUser;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class User extends Authenticatable
 {
@@ -52,9 +52,20 @@ class User extends Authenticatable
         ];
     }
  
-    public function CutiUser(): HasOne
+    public function CutiUser(): HasMany
     {
-        return $this->hasOne(CutiUser::class,'user_id');
-}
+        return $this->hasMany(CutiUser::class,'user_id');
+
+    }
+
+    /**
+     * Get the user associated with the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function validasiCutiUser(): HasOne
+    {
+        return $this->hasOne(validasiCutiUser::class, 'foreign_key', 'local_key');
+    }
   
 }
