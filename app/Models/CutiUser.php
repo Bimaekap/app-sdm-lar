@@ -10,6 +10,7 @@ class CutiUser extends Model
     protected $table = 'cuti_user';
 
     protected $primaryKey = 'user_id';
+    
     protected $fillable = [
         'id',
         'user_id',

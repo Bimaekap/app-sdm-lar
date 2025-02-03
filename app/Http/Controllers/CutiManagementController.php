@@ -14,9 +14,16 @@ class CutiManagementController extends Controller
     public function pageformatcuti()
     {
         $kategoriCuti = KategoriCuti::get()->all();
-        $user_cuti = User::with('CutiUser')->get();
-            // dd($kategoriCuti[0]->jumlah_cuti);
-        return view('admin.contents.cuti-management.page-format-cuti',['kategoriCuti' => $kategoriCuti]);
+        $data = User::with('CutiUser')->get()->all();
+            $users = collect($data);
+        // foreach($users as $data){
+        //     // echo $collections;
+        //     // echo $data->CutiUser;
+        //     // dd($data->CutiUser);
+        //     // dd('ok');
+        // }
+
+        return view('admin.contents.cuti-management.page-format-cuti',['kategoriCuti' => $kategoriCuti,'users' => $users]);
     }
 
     public function pagepengajuancuti()

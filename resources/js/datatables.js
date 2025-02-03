@@ -47,3 +47,19 @@ $('#submit').on('click', function (e) {
             '...'
     );
 });
+
+function myFunction() {
+    var dots = document.getElementById("selengkapnya");
+    var moreText = document.getElementById("hiddent-content");
+    var btnText = document.getElementById("lihatBtn");
+    alert('ok');
+    if (dots.style.display === "none") {
+      dots.style.display = "inline";
+      btnText.innerHTML = "Read more";
+      moreText.style.display = "none";
+    } else {
+      dots.style.display = "none";
+      btnText.innerHTML = "Read less";
+      moreText.style.display = "inline";
+    }
+  }

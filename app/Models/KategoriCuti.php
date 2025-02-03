@@ -17,8 +17,6 @@ class KategoriCuti extends Model
         'jenis_cuti',
         'jumlah_cuti',
         'status',
-    ];
-
-   
+    ];   
 }
 

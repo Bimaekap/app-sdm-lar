@@ -18,6 +18,7 @@ return new class extends Migration
             $table->enum('role', ['superadmin', 'admin', 'dosen', 'staff']);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->boolean('status_validasi');
             $table->rememberToken();
             $table->timestamps();
         });

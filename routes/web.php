@@ -35,7 +35,11 @@ Route::middleware('auth')->group(function () {
         Route::get('/form-ubah-cuti',[CutiManagementController::class,'formubahcuti'])->name('form.ubah.cuti');
         Route::post('/tambah-cuti',[CutiManagementController::class,'tambahcuti'])->name('post.tambah.cuti');
 
-        Route::get('/cuti-user/{id}',[CutiManagementController::class,'showcuti'])->name('show.cuti.user');
+        Route::get('/cuti-user/{id}',function(string $id){
+
+            $userCuti = App\Models\User::with('CutiUser')->where('id',$id)->get();
+           return $collections = collect($userCuti);
+        })->name('show.cuti.user');
     });
 
     Route::group(['middleware' => 'staff', 'prefix' => 'staff'], function () {

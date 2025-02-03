@@ -22,23 +22,31 @@ class UserManagementController extends Controller
 
     public function create(CreateUserRequest $request): RedirectResponse
     {
-        $credentials = $request->validated();
+        /*
+        #TODO : 
+        [x]  Berikan Status Validasi :default 0 ketika selesai membuat akun user baru.
+        [] save 2 model untuk database kategori users dan buat users
+        []buat modal untuk update semua users ketika hrd menambah data cuti
+        */
         $datacuti = KategoriCuti::select(['jenis_cuti','jumlah_cuti'])->get()->all();
-        // #TODO: save 2 model untuk database kategori users dan buat users
-        // #TODO: buat modal untuk update semua users ketika hrd menambah data cuti
-        $newUser = User::create($credentials);
+        $newUser = new User();
+        $newUser['name'] = $request->name;
+        $newUser['email'] = $request->email;
+        $newUser['role'] = $request->role;
+        $newUser['password'] = $request->password;
+        $newUser->save();
         if($newUser){
             foreach ($datacuti as $data){
-                CutiUser::create([
-                    'user_id' => $newUser->id,
-                    'jenis_cuti' => $data->jenis_cuti,
-                    'jumlah_cuti' => $data->jumlah_cuti
-                ]);
-            }
+               $userData =  CutiUser::create([
+                'user_id' => $newUser->id,
+                'jenis_cuti' => $data->jenis_cuti,
+                'jumlah_cuti' => $data->jumlah_cuti
+            ]);
+
         }
-       
-
-
+        // * CREATE Validasi Cuti Users
+        DB::insert('INSERT INTO validasi_cuti_users ( users_id, status_cuti_user) VALUES (?, ?)', [$newUser->id,0]);
+        }
         return redirect()->route('page.user')->with('messages', 'User Berhasil Di Simpan');
     }
 }
