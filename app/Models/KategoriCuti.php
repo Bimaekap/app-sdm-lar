@@ -12,6 +12,7 @@ class KategoriCuti extends Model
 
 
     protected $primaryKey = 'cuti_id';
+
     protected $fillable = [
         'id',
         'jenis_cuti',

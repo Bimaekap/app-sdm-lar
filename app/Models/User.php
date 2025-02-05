@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\CutiUser;
 use App\Models\validasiCutiUser;
+use App\Models\PengajuanCutiUser;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -55,7 +56,6 @@ class User extends Authenticatable
     public function CutiUser(): HasMany
     {
         return $this->hasMany(CutiUser::class,'user_id');
-
     }
 
     /**
@@ -67,5 +67,14 @@ class User extends Authenticatable
     {
         return $this->hasOne(validasiCutiUser::class, 'foreign_key', 'local_key');
     }
-  
+
+/**
+     * Get all of the pengajuanCutiUser for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function pengajuanCutiUser(): HasMany
+    {
+        return $this->hasMany(PengajuanCutiUser::class,'users_id');
+    }
 }

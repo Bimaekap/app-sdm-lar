@@ -22,10 +22,11 @@ class LoginController extends Controller
                 return redirect()->route('dashboard.admin');
             }
             if (Auth::user()->role == 'staff') {
-                dd('staff');
+                return redirect()->route('dashboard.staff');
             }
             if (Auth::user()->role == 'dosen') {
-                dd('dosen');
+                return redirect()->route('dashboard.dosen');
+
             }
         } else {
             return back()->with('login', 'Email Dan Password salah');
