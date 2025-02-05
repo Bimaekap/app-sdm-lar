@@ -53,14 +53,15 @@ class CutiManagementController extends Controller
             'jumlah_cuti' => $request->jumlah_cuti,
             'status' => 1
         ]);
+
         $namaCuti = Str::title($request->jenis_cuti);
         return redirect()->back()->with('messages','Jenis Cuti '.$namaCuti.' Disimpan');
     }
 
     public function showcuti(string $id): RedirectResponse
     {
-
         // $userBaseOnId = User::find($id);
         return redirect()->back()->with(['userBaseOnId' => $userBaseOnId]);
+
     }
 }

@@ -29,7 +29,6 @@ class UserManagementController extends Controller
         [] save 2 model untuk database kategori users dan buat users
         [] buat modal untuk update semua users ketika hrd menambah data cuti
         */
-
         $datacuti = KategoriCuti::select(['jenis_cuti','jumlah_cuti'])->get()->all();
         $newUser = new User();
         $newUser['name'] = $request->name;
@@ -47,6 +46,7 @@ class UserManagementController extends Controller
                 'jumlah_cuti' => $data->jumlah_cuti
             ]);
         }
+
         // * CREATE Validasi Cuti Users
         DB::insert('INSERT INTO validasi_cuti_users ( user_id, status_validasi) VALUES (?, ?)', [$newUser->id,0]);
 
@@ -54,12 +54,12 @@ class UserManagementController extends Controller
         return redirect()->route('page.user')->with('messages', 'User Berhasil Di Simpan');
     }
 
-   public function pengajuanCutiPerUser($id){
-    
+   public function pengajuanCutiPerUser($id)
+   {
+
     $pengajuanCutiPerUser =  User::with('pengajuanCutiUser')->where('id',$id)->get();
-    // dd($pengajuanCutiPerUser);
+
     return view('admin.contents.cuti-management.page-pengajuan-cuti-saya',['pengajuanCutiPerUser' => $pengajuanCutiPerUser]);
-    
-}
+    }
 
 }
