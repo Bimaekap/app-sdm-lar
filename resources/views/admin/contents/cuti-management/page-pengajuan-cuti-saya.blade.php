@@ -27,8 +27,8 @@
 
 {{-- card --}}
 <div class="container mt-5">
-    <h1 class="text-gray-300 text-2xl font-semibold"> Users Management</h1>
-    <span class="text-gray-500 mt-5">Pengaturan Management Semua Users</span>
+    <h1 class="text-gray-300 text-2xl font-semibold"> Pengajuan Cuti Saya</h1>
+    <span class="text-gray-500 mt-5">History Pengajuan Cuti {{ Auth::user()->name }}</span>
 </div>
 
 {{-- #README : https://datatables.net/manual/installation --}}
@@ -36,7 +36,7 @@
 <div class="container mt-5">
     <div class="grid grid-cols-2">
         <div class="">
-            <h1 class="text-white font-bold text-2xl pt-4 mb-5">All Users {{ count($users) }}</h1>
+            {{-- <h1 class="text-white font-bold text-2xl pt-4 mb-5">All Users {{ count($users) }}</h1> --}}
         </div>
         <div class="">
             <div class=" flex items-center flex-row gap-4 justify-end">
@@ -58,8 +58,9 @@
                 {{-- ! Modal Users --}}
                 <div x-data="{modalIsOpen: false}">
                     <button @click="modalIsOpen = true" type="button"
-                        class="cursor-pointer whitespace-nowrap rounded-md bg-black px-4 py-2 text-center text-sm font-medium tracking-wide text-neutral-100 transition hover:opacity-75 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black active:opacity-100 active:outline-offset-0 dark:bg-white dark:text-black dark:focus-visible:outline-white">Add
-                        User</button>
+                        class="cursor-pointer whitespace-nowrap rounded-md bg-black px-4 py-2 text-center text-sm font-medium tracking-wide text-neutral-100 transition hover:opacity-75 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black active:opacity-100 active:outline-offset-0 dark:bg-white dark:text-black dark:focus-visible:outline-white">Pilih
+                        Filter
+                    </button>
                     <div x-cloak x-show="modalIsOpen" x-transition.opacity.duration.200ms
                         x-trap.inert.noscroll="modalIsOpen" @keydown.esc.window="modalIsOpen = false"
                         @click.self="modalIsOpen = false"
@@ -206,13 +207,15 @@
                             </div>
                         </label>
                     </th>
-                    <th scope="col" class="p-4">User Name</th>
-                    <th scope="col" class="p-4">Role</th>
-                    <th scope="col" class="p-4">Action</th>
+                    <th scope="col" class="p-4">Jenis Cuti</th>
+                    <th scope="col" class="p-4">Jumlah Cuti Di Pakai</th>
+                    <th scope="col" class="p-4">Sisa Cuti</th>
+                    <th scope="col" class="p-4">File Cuti</th>
                 </tr>
             </thead>
             <tbody class="divide-y divide-neutral-300 dark:divide-neutral-700">
-                @forelse ($users as $user)
+                @foreach ($pengajuanCutiPerUser as $data)
+                @foreach ($data->pengajuanCutiUser as $item)
                 <tr>
                     <td class="p-4">
                         <label for="user2335"
@@ -232,24 +235,22 @@
 
                     <td class="p-4">
                         <div class="flex flex-col">
-                            <span class="text-sm font-bold text-neutral-900 dark:text-white">{{ $user->name
-                                }}</span>
-                            <span class="w-32 overflow-hidden text-ellipsis text-xs md:w-36" aria-hidden="true">{{
-                                $user->email }}</span>
+                            <p>{{ $item->jenis_cuti }}</p>
                         </div>
                     </td>
                     <td class="p-4">
-                        {{ $user->role }}
+                        {{ $item->jumlah_cuti }}
                     </td>
-                    <td class="p-4"><button type="button"
-                            class="cursor-pointer whitespace-nowrap rounded-md bg-transparent p-0.5 font-semibold text-black outline-black hover:opacity-75 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 active:opacity-100 active:outline-offset-0 dark:text-white dark:outline-white">Edit</button>
+                    <td class="p-4">
+                        <p>20</p>
+                    </td>
+                    <td>
+                        {{ $item->file_pengajuan }}
                     </td>
                 </tr>
-                @empty
-                <tr>
-                    <td>Data Kosong</td>
-                </tr>
-                @endforelse
+
+                @endforeach
+                @endforeach
             </tbody>
         </table>
     </div>
@@ -286,9 +287,8 @@
         </button>
     </div>
 </div>
-
+@endif
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 
-@endif
 @endsection

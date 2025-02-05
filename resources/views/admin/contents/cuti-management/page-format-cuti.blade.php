@@ -99,7 +99,7 @@
                 </button>
                 <div x-cloak x-show="isOpenSelengkapnya" x-on:click.outside="openSelengkapnya = false"
                     x-on:keydown.down.prevent="$focus.wrap().next()" x-on:keydown.up.prevent="$focus.wrap().previous()"
-                    x-transition="" x-trap="open" class="rounded-xl h-fit w-56 p-2 bg-neutral-800 z-20 ml-9 absolute">
+                    x-transition="" class="rounded-xl h-fit w-56 p-2 bg-neutral-800 z-20 ml-9 absolute">
                     <ul>
                         <div class="mt-5 flex justify-between bg-widget-1 p-2 rounded-lg">
                             <li>
@@ -130,8 +130,40 @@
 
 {{-- #TODO: Filter Tabel untuk status --}}
 <div class="container mt-5" x-data="{ checkAll : false }">
+    <div class="grid grid-cols-2">
+        <div class="">
+            <h1 class="text-white font-bold text-2xl pt-4 mb-5">All Users {{ count($users) }}</h1>
+        </div>
+        <div class="">
+            <div class=" flex items-center flex-row gap-4 justify-end">
+                <!-- search  -->
+                <div class="relative my-4 flex w-full max-w-xs flex-col gap-1 text-neutral-600 dark:text-neutral-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" fill="none"
+                        stroke-width="2"
+                        class="absolute left-2 top-1/2 size-5 -translate-y-1/2 text-neutral-600/50 dark:text-neutral-300/50"
+                        aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                    </svg>
+                    <input type="search" id="search-input-users"
+                        class=" w-full border border-neutral-300 rounded-md bg-white px-2 py-1.5 pl-9 text-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black disabled:cursor-not-allowed disabled:opacity-75 dark:border-neutral-700 dark:bg-neutral-950/50 dark:focus-visible:outline-white"
+                        name="search" aria-label="Search" placeholder="Search" />
+                </div>
+                {{-- ! Form Action Untuk Filter --}}
+
+                <select id="filter-status" name="filter-status" class="filter cursor-pointer whitespace-nowrap rounded-md bg-black px-4 
+                    py-2 text-center text-sm font-medium tracking-wide text-neutral-100 transition
+                     hover:opacity-75 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+                      focus-visible:outline-black active:opacity-100 active:outline-offset-0 dark:bg-white dark:text-black
+                       dark:focus-visible:outline-white">
+                    <option class="pointer">Pilih Filter</option>
+                    <option value="status_validasi" class="pointer">Status</option>
+                </select>
+            </div>
+        </div>
+    </div>
     <div class="overflow-hidden w-full overflow-x-auto rounded-md border border-neutral-300 dark:border-neutral-700">
-        <table id="table-users" class="w-full text-left text-sm text-neutral-600 dark:text-neutral-300">
+        <table id="admin-table-users" class="w-full text-left text-sm text-neutral-600 dark:text-neutral-300">
             <thead
                 class="border-b border-neutral-300 bg-neutral-50 text-sm text-neutral-900 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white">
                 <tr>
@@ -150,8 +182,8 @@
                     </th>
                     <th scope="col" class="p-4">User</th>
                     <th scope="col" class="p-4">Role</th>
-                    {{-- <th scope="col" class="p-4">Status</th> --}}
                     <th scope="col" class="p-4">Lihat Sisa Cuti</th>
+
                 </tr>
             </thead>
             <tbody class="divide-y divide-neutral-300 dark:divide-neutral-700">
@@ -173,9 +205,6 @@
                     </td>
                     <td class="p-4">
                         <div class="flex w-max items-center gap-2">
-                            <img class="size-10 rounded-full object-cover"
-                                src="https://penguinui.s3.amazonaws.com/component-assets/avatar-8.webp"
-                                alt="user avatar" />
                             <div class="flex flex-col">
                                 <span class="text-neutral-900 dark:text-white">{{ $user->name }}</span>
                                 <span class="text-sm text-neutral-600 opacity-85 dark:text-neutral-300">{{
@@ -184,11 +213,8 @@
                         </div>
                     </td>
                     <td class="p-4">{{ $user->role }}</td>
-                    {{-- <td class="p-4"><span
-                            class="inline-flex overflow-hidden rounded -md border border-green-500 px-1 py-0.5 text-xs font-medium text-green-500 bg-green-500/10">Active</span>
-                    </td> --}}
-                    {{-- Modal --}}
-                    {{-- #TODO: looping data cuti view di dalam modal berdasarkan user id --}}
+
+                    {{--! Modal Untuk Menunjukkan Sisa Cuti User --}}
                     <td class="p-4">
                         <div x-data="{modalIsOpen: false}">
                             <a href="{{ route('show.cuti.user',$user->id) }}" onclick="event.preventDefault()"
@@ -264,7 +290,6 @@
     </div>
 
 </div>
-
 
 
 

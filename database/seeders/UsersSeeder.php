@@ -14,12 +14,19 @@ class UsersSeeder extends Seeder
      */
     public function run(): void
     {
-        User::create([
-            'name' => 'superadmin',
-            'role' => 'superadmin',
-            'email' => 'superadmin@gmail.com',
-            'status_validasi' => 0,
-            'password' => Hash::make('password'),
-        ]);
+
+        $items = [
+            [   
+                'name' => 'superadmin',
+                'role' => 'superadmin',
+                'email' => 'superadmin@gmail.com',
+                'status_validasi' => 0,
+                'password' => Hash::make('password'),
+            ],
+        ];
+
+        foreach ($items as $item){
+            User::create($item);
+        }
     }
 }
