@@ -20,8 +20,13 @@ class UserManagementController extends Controller
         return view('superadmin.contents.users-management.page-user',['user' => $user]);
     }
 
+    public function pagecreateuser(){
+
+        return view('superadmin.contents.users-management.crud.create-user');
+    }
     public function create(CreateUserRequest $request): RedirectResponse
     {
+        
         /*
         #TODO : 
         [x] Berikan Status Validasi :default 0 ketika selesai membuat akun user baru.
@@ -58,7 +63,7 @@ class UserManagementController extends Controller
    {
 
     $pengajuanCutiPerUser =  User::with('pengajuanCutiUser')->where('id',$id)->get();
-
+dd($pengajuanCutiPerUser);
     return view('admin.contents.cuti-management.page-pengajuan-cuti-saya',['pengajuanCutiPerUser' => $pengajuanCutiPerUser]);
     }
 

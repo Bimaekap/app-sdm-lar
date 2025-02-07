@@ -3,6 +3,6 @@
 @section('title','Superadmin')
 @section('content')
 <div>
-    <p class="text-white">content superadmin</p>
+    <p class="">content superadmin</p>
 </div>
 @endsection
