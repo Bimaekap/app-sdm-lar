@@ -6,12 +6,13 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\PengajuanCuti;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\PengajuanCutiRequest;
 
 class PengajuanCutiController extends Controller
 {
-    public function pengajuanCuti(Request $request, $id)
+    public function pengajuanCuti(Request $request)
 
     {
         /* #TODO: Fitur
@@ -22,14 +23,14 @@ class PengajuanCutiController extends Controller
         [x] buat validasi ketika jatah_cuti telah habis, dan hilangkan data cuti nya
         []  aktifkan hasil validasi message sukses
         */
-        dd($request->all());
+        // dd($request->all());
     // ! variabel mengambil data user dari tabel relationship cuti user
-    $userCuti =  User::with('CutiUser')->where('id',$id)->get();
+    $userCuti =  User::with('CutiUser')->where('id',Auth::user()->id)->get();
     $collections = collect($userCuti);
     // ! varibel untuk mengambil langsung ke data cuti user
-    $user = User::find($id);
+    $user = User::find(Auth::user()->id);
     $cuti = $user->CutiUser()->where('jenis_cuti',$request->jenis_cuti)->first();
-        $userData = User::where('id',$id)->get()->first();
+        $userData = User::where('id',Auth::user()->id)->get()->first();
         $fileStorage = Storage::disk('file_cuti');
             $file = $request->file('file_pengajuan');
             $fileName = $file->getClientOriginalName();
@@ -37,7 +38,7 @@ class PengajuanCutiController extends Controller
             $fileStorage->putFileAs($userData->role . '/' .$userData->name.'/data', $file,$fileName, 'public');
             // DB::table('insert into pengajuan_cuti', )
             PengajuanCuti::create([
-                'users_id' => $id,
+                'users_id' => Auth::user()->id,
                 'jenis_cuti' => $request->jenis_cuti,
                 'file_pengajuan' => $fileName,
                 'jumlah_cuti' => $request->jumlah_cuti,

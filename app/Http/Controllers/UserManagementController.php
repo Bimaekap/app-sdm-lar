@@ -58,12 +58,9 @@ class UserManagementController extends Controller
     }
         return redirect()->route('page.user')->with('messages', 'User Berhasil Di Simpan');
     }
-
    public function pengajuanCutiPerUser($id)
    {
-
     $pengajuanCutiPerUser =  User::with('pengajuanCutiUser')->where('id',$id)->get();
-dd($pengajuanCutiPerUser);
     return view('admin.contents.cuti-management.page-pengajuan-cuti-saya',['pengajuanCutiPerUser' => $pengajuanCutiPerUser]);
     }
 

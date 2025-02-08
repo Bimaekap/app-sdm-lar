@@ -10,7 +10,8 @@ class KategoriCuti extends Model
 {
     protected  $table = 'kategori_cuti';
 
-
+    protected $dates = ['created_at'];
+    
     protected $primaryKey = 'cuti_id';
 
     protected $fillable = [

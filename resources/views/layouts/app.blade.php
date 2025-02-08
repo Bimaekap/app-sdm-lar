@@ -137,18 +137,14 @@
                     </div>
                 </aside>
                 <ul class="sidebar-menu">
-
+                    {{-- ! Sidebar superadmin --}}
+                    @if(Auth::user()->role == 'superadmin')
                     <li class="menu-header">Home</li>
-
-                    <li><a class="nav-link" href="blank.html"><i class="fas fa-fire"></i> <span>Dashboard</span></a>
-
-
-
+                    <li><a class="nav-link" href="{{ route('dashboard.superadmin') }}"><i class="fas fa-fire"></i>
+                            <span>Dashboard</span></a>
                     <li class="menu-header">Managemen User</li>
-
                     <li><a class="nav-link" href="{{route('page.user') }}"><i class="far fa-user"></i> <span>Managemen
                                 User</span></a>
-
                     <li class="menu-header">Cuti</li>
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="far fa-file-alt"></i>
@@ -161,9 +157,57 @@
                             <li><a class="nav-link" href="layout-top-navigation.html"></a></li>
                         </ul>
                     </li>
+                    @endif
+                    @if (Auth::user()->role == 'admin')
+                    <li class="menu-header">Home</li>
+                    <li><a class="nav-link" href="{{ route('dashboard.admin') }}"><i class="fas fa-fire"></i>
+                            <span>Dashboard</span></a>
+                    <li class="menu-header">Managemen User</li>
+                    <li><a class="nav-link" href="{{route('page.user') }}"><i class="far fa-user"></i> <span>Managemen
+                                User</span></a>
+                    <li class="menu-header">Cuti</li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="far fa-file-alt"></i>
+                            <span>Managemen Cuti</span></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="nav-link" href="{{ route('page.format.cuti')}}">Format Cuti</a>
+                            </li>
+                            <li><a class="nav-link" href="{{ route('page.pengajuan.cuti',Auth::user()->id) }}">Pengajuan
+                                    Cuti</a></li>
+                            <li><a class="nav-link" href="layout-top-navigation.html"></a></li>
+                        </ul>
+                    <li><a class="nav-link" href="{{ route('pengajuan.cutiper.user',Auth::user()->id) }}"><i
+                                class="far fa-file-alt"></i>
+                            <span>Pengajuan Cuti Saya</span></a>
+                    </li>
+                    @endif
+                    @if (Auth::user()->role == 'staff')
+                    <li class="menu-header">Home</li>
+                    <li><a class="nav-link" href="{{ route('dashboard.staff') }}"><i class="fas fa-fire"></i>
+                            <span>Dashboard</span></a>
+                    <li class="menu-header">Cuti</li>
+                    <li><a class="nav-link" href="{{ route('pengajuan.cutiper.user', Auth::user()->id) }}"><i
+                                class="far fa-file-alt"></i>
+                            <span>Pengajuan Cuti Saya</span></a>
+                    <li><a class="nav-link" href="{{ route('page.pengajuan.cuti',Auth::user()->id) }}"><i
+                                class="far fa-file-alt"></i>
+                            <span>Pengajuan Cuti</span></a>
+                        @endif
+                        @if (Auth::user()->role == 'dosen')
+                    <li class="menu-header">Home</li>
+                    <li><a class="nav-link" href="{{ route('dashboard.dosen') }}"><i class="fas fa-fire"></i>
+                            <span>Dashboard</span></a>
+                    <li class="menu-header">Cuti</li>
+                    <li><a class="nav-link" href="{{ route('pengajuan.cutiper.user',Auth::user()->id) }}"><i
+                                class="far fa-file-alt"></i>
+                            <span>Pengajuan Cuti Saya</span></a>
+                    <li><a class="nav-link" href="{{ route('page.pengajuan.cuti',Auth::user()->id) }}"><i
+                                class="far fa-file-alt"></i>
+                            <span>Pengajuan Cuti</span></a>
+                        @endif
+
                 </ul>
             </div>
-
             <!-- Main Content -->
             <div class="main-content">
                 @yield('content')
@@ -190,7 +234,7 @@
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-    <script src="{{ asset('/assets/js/stisla.js') }}"></script>
+    <script src="{{ asset('assets/js/stisla.js') }}"></script>
 
     <!-- JS Libraies -->
 

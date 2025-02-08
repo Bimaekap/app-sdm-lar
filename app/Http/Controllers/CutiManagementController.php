@@ -42,26 +42,46 @@ class CutiManagementController extends Controller
         return view('admin.contents.cuti-management.forms.form-format-cuti',['kategoriCuti' => $kategoriCuti]);
     }
 
+    // #TODO: buat halaman form cuti
+    
+    public function formtambahcuti(Request $request)
+    {
+        return view('admin.contents.cuti-management.forms.form-tambah-cuti');
+    }
+    // Creat Cuti
     public function tambahcuti(Request $request) : RedirectResponse
     {
-        $request->validate([
+
+       $validator = $request->validate([
             'jenis_cuti' => 'required|unique:kategori_cuti',
             'jumlah_cuti' => 'required'
-        ],);
+        ],
+        [
+            'jenis_cuti.required' => 'Jenis cuti tidak boleh kosong',
+            'jenis_cuti.unique' => 'Jenis cuti ini sudah tersedia',
+            'jumlah_cuti.required' => 'Jumlah cuti tidak boleh kosong'
+        ]);
         KategoriCuti::create([
             'jenis_cuti' => Str::title($request->jenis_cuti),
             'jumlah_cuti' => $request->jumlah_cuti,
             'status' => 1
         ]);
+        
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator);
+        }
+
 
         $namaCuti = Str::title($request->jenis_cuti);
-        return redirect()->back()->with('messages','Jenis Cuti '.$namaCuti.' Disimpan');
+        session()->flash('messages', 'Jenis Cuti '.$namaCuti.' Disimpan');
+
+        return redirect()->back();
         
     }
 
     public function showcuti(string $id): RedirectResponse
     {
-        // $userBaseOnId = User::find($id);
-        return redirect()->back()->with(['userBaseOnId' => $userBaseOnId]);
+        dd('ok');
+        return view('admin.contents.cuti-management.crud.tambah-cuti');
     }
 }

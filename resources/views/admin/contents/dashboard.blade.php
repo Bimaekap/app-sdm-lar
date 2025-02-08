@@ -10,7 +10,7 @@
 --}}
 <div>
 
-    <div class="grid grid-rows-3 grid-flow-col gap-4 h-fit py-5">
+    {{-- <div class="grid grid-rows-3 grid-flow-col gap-4 h-fit py-5">
         <div class="row-span-3 bg-neutral-800 rounded-lg h-full w-full max-w-96 max-h-80 py-3 ">
             <h1 class="text-white text-xl font-semibold justify-center text-center mb-2">Sisa Cuti Saya</h1>
             <hr class=" mt-2 text-neutral-700 mb-3">
@@ -46,7 +46,7 @@
         <div class="bg-neutral-800 w-64  col-span-2 rounded-lg">
             <p class="text-white"> Pengajuan Terakhir</p>
         </div>
-    </div>
+    </div> --}}
 
 </div>
 @endsection

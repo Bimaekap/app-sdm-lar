@@ -11,9 +11,9 @@
 
 <section class="section">
     <div class="section-header">
-        <h1>Data Cuti</h1>
+        <h1>Format Cuti</h1>
         <div class="section-header-breadcrumb">
-            <div class="breadcrumb-item active"><a href="{{ route('dashboard.superadmin') }}">Dashboard</a></div>
+            <div class="breadcrumb-item active"><a href="{{ route('dashboard.admin') }}">Dashboard</a></div>
             <div class="breadcrumb-item"><a href="#!">Format Cuti</a></div>
         </div>
     </div>
@@ -40,7 +40,9 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4>Advanced Table</h4>
+                <a href="{{ route('form.tambah.cuti')}}" class="btn btn-primary my-3">Tambah
+                    Cuti</a>
+
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -80,7 +82,6 @@
             </div>
         </div>
     </div>
-    <a href="{{ route('form.pengajuan.cuti',Auth::user()->name) }}" class="btn btn-primary my-3">Tambah Cuti</a>
 </section>
 
 

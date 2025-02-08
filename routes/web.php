@@ -37,15 +37,20 @@ Route::middleware('auth')->group(function () {
         Route::get('/format-cuti',[CutiManagementController::class,'pageformatcuti'])->name('page.format.cuti');
         Route::get('/pengajuan-cuti/{id}',[CutiManagementController::class,'pagepengajuancuti'])->name('page.pengajuan.cuti');
         Route::get('/cuti/{id}',[UserManagementController::class,'pengajuanCutiPerUser'])->name('pengajuan.cutiper.user');
-        
-        // * Forms
+        // * Get Cuti base on name
+        Route::get('/showcuti/{name}', [CutiManagementController::class,'showcuti'])->name('get.form.cuti');
         Route::get('/form-ubah-cuti',[CutiManagementController::class,'formubahcuti'])->name('form.ubah.cuti');
+        Route::get('/users-management', [UserManagementController::class, 'pageuser'])->name('page.user');
+       
+          // * Get form Cuti
+
+        Route::get('/tambah-cuti', [CutiManagementController::class,'formTambahCuti'])->name('form.tambah.cuti');
         Route::post('/tambah-cuti',[CutiManagementController::class,'tambahcuti'])->name('post.tambah.cuti');
-
-         // * Tabel users management
+        // *-------------------------
+        // * Tabel users management
         //  #TODO: Perbaiki route dibawah
-        Route::any('status-filter',[FilterUserController::class, 'filterStatus'])->name('filter.status');
-
+        Route::any('/status-filter',[FilterUserController::class, 'filterStatus'])->name('filter.status');
+    
         // #NOTE: function hasil semua data cuti user ada di sini 
         Route::get('/cuti-user/{id}',function(string $id){
 
