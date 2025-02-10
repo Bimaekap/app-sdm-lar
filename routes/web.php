@@ -19,7 +19,7 @@ Route::get('/',  function () {
 
 Route::post('post.login', [LoginController::class, 'login'])->name('post.login');
 Route::post('post.logout', [LoginController::class, 'logout'])->name('post.logout');
-
+// Route::get('profile',['])
 Route::middleware('auth')->group(function () {
     Route::group(['middleware' => 'superadmin', 'prefix' => 'superadmin'], function () {
         Route::get('/dashboard', [DashboardController::class, 'dashboardSuperAdmin'])->name('dashboard.superadmin');
@@ -27,9 +27,15 @@ Route::middleware('auth')->group(function () {
 
 
         // * Users Management
+
         Route::get('create-newuser',[UserManagementController::class,'pagecreateuser'])->name('page.create.user');
         Route::post('create-user', [UserManagementController::class, 'create'])->name('create.user');
-           
+              // * List Cuti User
+        // #NOTE: function hasil semua data cuti user ada di sini 
+
+        Route::get('/list-cuti-users',[CutiManagementController::class,'showListCuti'])->name('get.list.cuti.user');
+        Route::get('/halaman-file-users',[CutiManagementController::class,'lembarCutiUser'])->name('get.lembar.cuti.user');
+        
     });
 
     Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function () {
@@ -42,7 +48,13 @@ Route::middleware('auth')->group(function () {
         Route::get('/form-ubah-cuti',[CutiManagementController::class,'formubahcuti'])->name('form.ubah.cuti');
         Route::get('/users-management', [UserManagementController::class, 'pageuser'])->name('page.user');
        
-          // * Get form Cuti
+     
+        // * Hapus User
+        Route::post('delete-user/{id}',[UserManagementController::class,'destroy'])->name('destroy.user');
+        // * Get form Cuti
+                // #NOTE: function hasil semua data cuti user ada di sini 
+
+        Route::get('/list-cuti-users',[CutiManagementController::class,'showListCuti'])->name('get.list.cuti.user');
 
         Route::get('/tambah-cuti', [CutiManagementController::class,'formTambahCuti'])->name('form.tambah.cuti');
         Route::post('/tambah-cuti',[CutiManagementController::class,'tambahcuti'])->name('post.tambah.cuti');
@@ -51,7 +63,6 @@ Route::middleware('auth')->group(function () {
         //  #TODO: Perbaiki route dibawah
         Route::any('/status-filter',[FilterUserController::class, 'filterStatus'])->name('filter.status');
     
-        // #NOTE: function hasil semua data cuti user ada di sini 
         Route::get('/cuti-user/{id}',function(string $id){
 
             $userCuti = App\Models\User::with('CutiUser')->where('id',$id)->get();

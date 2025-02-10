@@ -24,6 +24,7 @@ class UserManagementController extends Controller
 
         return view('superadmin.contents.users-management.crud.create-user');
     }
+
     public function create(CreateUserRequest $request): RedirectResponse
     {
         
@@ -62,6 +63,23 @@ class UserManagementController extends Controller
    {
     $pengajuanCutiPerUser =  User::with('pengajuanCutiUser')->where('id',$id)->get();
     return view('admin.contents.cuti-management.page-pengajuan-cuti-saya',['pengajuanCutiPerUser' => $pengajuanCutiPerUser]);
+    }
+
+    public function profileUse(Request $request, $id)
+    {
+        $user = User::find($id);
+        return view('profile-user',['user',$user]);
+    }
+
+    public function destroy($id)
+    {
+        $user = User::find($id);
+
+        $user->delete();
+
+        session()->flash('messages',$user->name .'berhasil di hapus');
+
+        return redirect()->back();
     }
 
 }

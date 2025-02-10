@@ -43,8 +43,6 @@ class PengajuanCutiController extends Controller
                 'file_pengajuan' => $fileName,
                 'jumlah_cuti' => $request->jumlah_cuti,
             ]);
-
-       
         foreach($collections as $items){
             foreach($items->cutiUser as $item){
                 if($item->jenis_cuti  == $request->jenis_cuti ){;
@@ -73,9 +71,11 @@ class PengajuanCutiController extends Controller
         $user = User::where('name',$name)->first();
         $userCuti =  User::with('CutiUser')->where('name',$name)->get();
         $collections = collect($userCuti);
+        $pengajuanCutiPerUser =  User::with('pengajuanCutiUser')->where('name',$name)->get();
+        
         // dd($user);
         // $userName = $user->where('name',$name)->get();
-        return view('admin.contents.cuti-management.forms.form-pengajuan-cuti',['user' => $user],['collections' => $collections]);
+        return view('admin.contents.cuti-management.forms.form-pengajuan-cuti',['pengajuanCutiPerUser' => $pengajuanCutiPerUser,'collections' => $collections],['user' => $user],[]);
     }
 
         

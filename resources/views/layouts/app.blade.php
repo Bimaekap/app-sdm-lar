@@ -4,9 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    <title>SDM</title>
-
-    <!-- General CSS Files -->
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" < <!-- General CSS Files -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
@@ -103,16 +101,13 @@
                     {{-- ! Nama User --}}
                     <li class="dropdown"><a href="#" data-toggle="dropdown"
                             class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-                            <img alt="image" src="../assets/img/avatar/avatar-1.png" class="rounded-circle mr-1">
+                            <img alt="image" src="{{ asset('img/avatar/avatar-1.png') }}" class="rounded-circle mr-1">
                             <div class="d-sm-none d-lg-inline-block">{{ Auth::user()->name }}</div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
                             {{-- <div class="dropdown-title">Logged in 5 min ago</div> --}}
-                            <a href="features-profile.html" class="dropdown-item has-icon">
+                            <a href="#" class="dropdown-item has-icon">
                                 <i class="far fa-user"></i> Profile
-                            </a>
-                            <a href="features-settings.html" class="dropdown-item has-icon">
-                                <i class="fas fa-cog"></i> Settings
                             </a>
                             <div class="dropdown-divider"></div>
                             <form action="{{ route('post.logout') }}" method="POST">
@@ -131,9 +126,8 @@
                     <div class="sidebar-brand">
                         <a href="index.html">SDM</a>
                     </div>
-
                     <div class="sidebar-brand sidebar-brand-sm">
-                        <a href="index.html">St</a>
+                        <a href="index.html">SDM</a>
                     </div>
                 </aside>
                 <ul class="sidebar-menu">
@@ -145,14 +139,16 @@
                     <li class="menu-header">Managemen User</li>
                     <li><a class="nav-link" href="{{route('page.user') }}"><i class="far fa-user"></i> <span>Managemen
                                 User</span></a>
-                    <li class="menu-header">Cuti</li>
+                    <li><a class="nav-link" href="{{route('get.list.cuti.user') }}"><i class="far fa-user"></i> <span>
+                                Pengajuan Cuti User</span></a>
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="far fa-file-alt"></i>
                             <span>Managemen Cuti</span></a>
                         <ul class="dropdown-menu">
                             <li><a class="nav-link" href="{{ route('page.format.cuti')}}">Format Cuti</a>
                             </li>
-                            <li><a class="nav-link" href="{{ route('page.pengajuan.cuti',Auth::user()->id) }}">Pengajuan
+                            <li><a class="nav-link"
+                                    href="{{ route('form.pengajuan.cuti',Auth::user()->name) }}">Pengajuan
                                     Cuti</a></li>
                             <li><a class="nav-link" href="layout-top-navigation.html"></a></li>
                         </ul>
@@ -162,10 +158,11 @@
                     <li class="menu-header">Home</li>
                     <li><a class="nav-link" href="{{ route('dashboard.admin') }}"><i class="fas fa-fire"></i>
                             <span>Dashboard</span></a>
-                    <li class="menu-header">Managemen User</li>
+                    <li class="menu-header">Managemen Pegawai</li>
                     <li><a class="nav-link" href="{{route('page.user') }}"><i class="far fa-user"></i> <span>Managemen
-                                User</span></a>
-                    <li class="menu-header">Cuti</li>
+                                Pegawai</span></a>
+                    <li><a class="nav-link" href="{{route('get.list.cuti.user') }}"><i class="far fa-user"></i> <span>
+                                Pengajuan Cuti Pegawai</span></a>
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="far fa-file-alt"></i>
                             <span>Managemen Cuti</span></a>
@@ -188,10 +185,10 @@
                     <li class="menu-header">Cuti</li>
                     <li><a class="nav-link" href="{{ route('pengajuan.cutiper.user', Auth::user()->id) }}"><i
                                 class="far fa-file-alt"></i>
-                            <span>Pengajuan Cuti Saya</span></a>
-                    <li><a class="nav-link" href="{{ route('page.pengajuan.cuti',Auth::user()->id) }}"><i
+                            <span>History</span></a>
+                    <li><a class="nav-link" href="{{ route('form.pengajuan.cuti',Auth::user()->name) }}"><i
                                 class="far fa-file-alt"></i>
-                            <span>Pengajuan Cuti</span></a>
+                            <span>Pengajuan</span></a>
                         @endif
                         @if (Auth::user()->role == 'dosen')
                     <li class="menu-header">Home</li>
@@ -200,8 +197,8 @@
                     <li class="menu-header">Cuti</li>
                     <li><a class="nav-link" href="{{ route('pengajuan.cutiper.user',Auth::user()->id) }}"><i
                                 class="far fa-file-alt"></i>
-                            <span>Pengajuan Cuti Saya</span></a>
-                    <li><a class="nav-link" href="{{ route('page.pengajuan.cuti',Auth::user()->id) }}"><i
+                            <span>History</span></a>
+                    <li><a class="nav-link" href="{{ route('form.pengajuan.cuti',Auth::user()->name) }}"><i
                                 class="far fa-file-alt"></i>
                             <span>Pengajuan Cuti</span></a>
                         @endif

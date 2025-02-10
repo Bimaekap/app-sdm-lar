@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Support\Str;
 use App\Models\KategoriCuti;
 use Illuminate\Http\Request;
+use App\Models\PengajuanCuti;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\TambahJenisCutiRequest;
@@ -17,12 +18,6 @@ class CutiManagementController extends Controller
         $kategoriCuti = KategoriCuti::get()->all();
         $data = User::with('CutiUser')->get()->all();
             $users = collect($data);
-        // foreach($users as $data){
-        //     // echo $collections;
-        //     // echo $data->CutiUser;
-        //     // dd($data->CutiUser);
-        //     // dd('ok');
-        // }
         return view('admin.contents.cuti-management.page-format-cuti',['kategoriCuti' => $kategoriCuti,'users' => $users]);
     }
 
@@ -41,14 +36,13 @@ class CutiManagementController extends Controller
         $kategoriCuti = KategoriCuti::get()->all();
         return view('admin.contents.cuti-management.forms.form-format-cuti',['kategoriCuti' => $kategoriCuti]);
     }
-
-    // #TODO: buat halaman form cuti
     
     public function formtambahcuti(Request $request)
     {
         return view('admin.contents.cuti-management.forms.form-tambah-cuti');
     }
     // Creat Cuti
+    // * Menu Post Tambah Cuti
     public function tambahcuti(Request $request) : RedirectResponse
     {
 
@@ -79,9 +73,28 @@ class CutiManagementController extends Controller
         
     }
 
+    // * Menu Sidebar Pengajuan Cuti User
+    //  * Berfungsi Untuk Menampilkan hasils semua data dari table pengajuan_cuti
+    public function showListCuti(){
+        $listCutiUser = PengajuanCuti::all();
+        return view('superadmin.contents.pengajuan-cuti-user');
+    }
+
+    // * Menu Sidebar Pengajuan Cuti User > Action Show
+    // * Berfungsi Untuk Menampilkan hasil data cuti berdasarkan id(user)
+    public function lembarCutiUser(){
+        return view('superadmin.contents.cuti.halaman-lembar-cuti');
+    }
+
+    // * Menu
     public function showcuti(string $id): RedirectResponse
     {
-        dd('ok');
         return view('admin.contents.cuti-management.crud.tambah-cuti');
     }
+
+    // #TODO: Buat Menu Untuk Edit Cuti Show berdasarkan ID
+    // public funtion editCutiShow(string $id)
+    // {
+    //     return view()
+    // }
 }

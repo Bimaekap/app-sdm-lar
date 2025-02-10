@@ -1,21 +1,18 @@
 @extends('layouts.app')
-@section('title', 'Users Management')
-
-@push('styles')
-<link rel="stylesheet" href="../node_modules/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
-<link rel="stylesheet" href="../node_modules/datatables.net-select-bs4/css/select.bootstrap4.min.css">
-@endpush
+@section('title', 'Management Pengajuan Cuti User')
 @section('content')
+
 <section class="section">
     <div class="section-header">
-        <h1>Managemen User</h1>
+        <h1>Menu Pengajuan Cuti</h1>
         <div class="section-header-breadcrumb">
             <div class="breadcrumb-item active"><a href="{{ route('dashboard.superadmin') }}">Dashboard</a></div>
-            <div class="breadcrumb-item"><a href="#!">Managemen User</a></div>
+            <div class="breadcrumb-item"><a href="#!">Management Pengajuan Cuti User</a></div>
         </div>
     </div>
+
     <div class="section-body">
-        <h2 class="section-title">Tabel Management User</h2>
+        <h2 class="section-title">Tabel Management Pengajuan Cuti User</h2>
         <div>
             <div class="row">
                 <div class="col-12">
@@ -35,15 +32,14 @@
                                                         class="custom-control-label">&nbsp;</label>
                                                 </div>
                                             </th>
-                                            <th>Username</th>
-                                            <th>Email</th>
-                                            <th>Role</th>
-                                            <th>Action</th>
+                                            <th>Nama</th>
+                                            <th>Jenis Cuti</th>
+                                            <th>Jumlah Cuti</th>
+                                            <th>File</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         {{-- ! Looping data disini --}}
-                                        @forelse($users as $user)
                                         <tr>
                                             <td>
                                                 <div class="custom-checkbox custom-control">
@@ -52,26 +48,20 @@
                                                     <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
                                                 </div>
                                             </td>
-                                            <td>{{ $user->name }}</td>
+                                            <td>pegawai 1</td>
                                             <td class="align-middle">
-                                                {{ $user->email }}
+                                                Cuti Sakit
                                             </td>
                                             <td>
-                                                {{-- <img alt="image" src="../assets/img/avatar/avatar-5.png"
-                                                    class="rounded-circle" width="35" data-toggle="tooltip"
-                                                    title="Wildan Ahdian"> --}}
-                                                {{ $user->role }}
+                                                10
+
                                             </td>
-                                            {{-- #TODO: Buat Fitur Delete User --}}
-                                            <td><a href="#" class="btn btn-primary">Edit</a>
-                                                <a href="#" class="btn btn-danger">Hapus</a>
+                                            <td>
+                                                filepengajuancuti.pdf
                                             </td>
+                                            <td><a href="#" class="btn btn-secondary">Edit</a></td>
                                         </tr>
-                                        @empty
-                                        <tr>
-                                            <td>Data Kosong</td>
-                                        </tr>
-                                        @endforelse
+
                                     </tbody>
                                 </table>
                             </div>
@@ -83,14 +73,4 @@
 
     </div>
 </section>
-
-@push('scripts')
-<script src="{{ asset('assets/datatables/media/js/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('assets/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-<script src="{{ asset('assets/datatables.net-select-bs4/js/select.bootstrap4.min.js') }}"></script>
-
-<script src="{{ asset('assets/js/page/modules-datatables.js') }}"></script>
-@endpush
-
-
 @endsection

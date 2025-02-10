@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    <title>SDM</title>
-
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    {{-- <title>SDM</title> --}}
     <!-- General CSS Files -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -45,7 +45,7 @@
                                     @method('POST')
                                     <div class="form-group">
                                         <label for="email">Email</label>
-                                        <input id="email" type="email" name="email" value="superadmin@gmail.com"
+                                        <input id="email" type="email" name="email" placeholder="Masukkan Email"
                                             class="form-control" name="email" tabindex="1" required autofocus>
                                         <div class="invalid-feedback">
                                             Please fill in your email
@@ -53,21 +53,20 @@
                                     </div>
 
                                     <div class="form-group">
-
-                                        <input id="password" type="password" value="password" name="password"
-                                            class="form-control" name="password" tabindex="2" required>
+                                        <input id="password" type="password" placeholder="Masukkan Password"
+                                            name="password" class="form-control" name="password" tabindex="2" required>
                                         <div class="invalid-feedback">
                                             please fill in your password
                                         </div>
                                     </div>
-
+                                    {{--
                                     <div class="form-group">
                                         <div class="custom-control custom-checkbox">
                                             <input type="checkbox" name="remember" class="custom-control-input"
                                                 tabindex="3" id="remember-me">
                                             <label class="custom-control-label" for="remember-me">Remember Me</label>
                                         </div>
-                                    </div>
+                                    </div> --}}
 
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
@@ -75,25 +74,8 @@
                                         </button>
                                     </div>
                                 </form>
-                                <div class="text-center mt-4 mb-3">
-                                    <div class="text-job text-muted">Login With Social</div>
-                                </div>
-                                <div class="row sm-gutters">
-                                    <div class="col-6">
-                                        <a class="btn btn-block btn-social btn-facebook">
-                                            <span class="fab fa-facebook"></span> Facebook
-                                        </a>
-                                    </div>
-                                    <div class="col-6">
-                                        <a class="btn btn-block btn-social btn-twitter">
-                                            <span class="fab fa-twitter"></span> Twitter
-                                        </a>
-                                    </div>
-                                </div>
+
                             </div>
-                        </div>
-                        <div class="mt-5 text-muted text-center">
-                            Don't have an account? <a href="auth-register.html">Create One</a>
                         </div>
                         <div class="simple-footer">
                             Copyright &copy; Universitas Satya Terra Bhinneka 2025

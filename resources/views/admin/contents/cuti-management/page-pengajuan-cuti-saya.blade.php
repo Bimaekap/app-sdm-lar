@@ -7,12 +7,12 @@
         <h1>Menu Pengajuan Cuti</h1>
         <div class="section-header-breadcrumb">
             <div class="breadcrumb-item active"><a href="{{ route('dashboard.admin') }}">Dashboard</a></div>
-            <div class="breadcrumb-item"><a href="#!">Pengajuan Cuti</a></div>
+            <div class="breadcrumb-item"><a href="#!">History Pengajuan Cuti</a></div>
         </div>
     </div>
 
     <div class="section-body">
-        <h2 class="section-title">Tabel Pengajuan Cuti</h2>
+        <h2 class="section-title">History</h2>
         <div>
             <div class="row">
                 <div class="col-12">
