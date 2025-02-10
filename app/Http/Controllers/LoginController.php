@@ -34,4 +34,14 @@ class LoginController extends Controller
         dd('gagal login');
         return redirect()->route('dashboard')->with('message', 'berhasil login');
     }
+
+public function logout(Request $request){
+    Auth::logout();
+
+    $request->session()->invalidate();
+
+    $request->session()->regenerateToken();
+
+    return redirect('/');
+}
 }

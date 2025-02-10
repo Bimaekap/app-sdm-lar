@@ -20,8 +20,14 @@ class UserManagementController extends Controller
         return view('superadmin.contents.users-management.page-user',['user' => $user]);
     }
 
+    public function pagecreateuser(){
+
+        return view('superadmin.contents.users-management.crud.create-user');
+    }
+
     public function create(CreateUserRequest $request): RedirectResponse
     {
+        
         /*
         #TODO : 
         [x] Berikan Status Validasi :default 0 ketika selesai membuat akun user baru.
@@ -53,13 +59,27 @@ class UserManagementController extends Controller
     }
         return redirect()->route('page.user')->with('messages', 'User Berhasil Di Simpan');
     }
-
    public function pengajuanCutiPerUser($id)
    {
-
     $pengajuanCutiPerUser =  User::with('pengajuanCutiUser')->where('id',$id)->get();
-
     return view('admin.contents.cuti-management.page-pengajuan-cuti-saya',['pengajuanCutiPerUser' => $pengajuanCutiPerUser]);
+    }
+
+    public function profileUse(Request $request, $id)
+    {
+        $user = User::find($id);
+        return view('profile-user',['user',$user]);
+    }
+
+    public function destroy($id)
+    {
+        $user = User::find($id);
+
+        $user->delete();
+
+        session()->flash('messages',$user->name .'berhasil di hapus');
+
+        return redirect()->back();
     }
 
 }

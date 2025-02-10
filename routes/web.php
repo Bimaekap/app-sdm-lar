@@ -18,7 +18,8 @@ Route::get('/',  function () {
 // Authenticate
 
 Route::post('post.login', [LoginController::class, 'login'])->name('post.login');
-
+Route::post('post.logout', [LoginController::class, 'logout'])->name('post.logout');
+// Route::get('profile',['])
 Route::middleware('auth')->group(function () {
     Route::group(['middleware' => 'superadmin', 'prefix' => 'superadmin'], function () {
         Route::get('/dashboard', [DashboardController::class, 'dashboardSuperAdmin'])->name('dashboard.superadmin');
@@ -26,36 +27,55 @@ Route::middleware('auth')->group(function () {
 
 
         // * Users Management
+
+        Route::get('create-newuser',[UserManagementController::class,'pagecreateuser'])->name('page.create.user');
         Route::post('create-user', [UserManagementController::class, 'create'])->name('create.user');
-    
-       
+              // * List Cuti User
+        // #NOTE: function hasil semua data cuti user ada di sini 
+
+        Route::get('/list-cuti-users',[CutiManagementController::class,'showListCuti'])->name('get.list.cuti.user');
+        Route::get('/halaman-file-users',[CutiManagementController::class,'lembarCutiUser'])->name('get.lembar.cuti.user');
+        
     });
 
     Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function () {
         Route::get('/dashboard', [DashboardController::class, 'dashboardAdmin'])->name('dashboard.admin');
         Route::get('/format-cuti',[CutiManagementController::class,'pageformatcuti'])->name('page.format.cuti');
-        Route::get('/pengajuan-cuti/{name}',[CutiManagementController::class,'pagepengajuancuti'])->name('page.pengajuan.cuti');
+        Route::get('/pengajuan-cuti/{id}',[CutiManagementController::class,'pagepengajuancuti'])->name('page.pengajuan.cuti');
         Route::get('/cuti/{id}',[UserManagementController::class,'pengajuanCutiPerUser'])->name('pengajuan.cutiper.user');
-        // * Forms
+        // * Get Cuti base on name
+        Route::get('/showcuti/{name}', [CutiManagementController::class,'showcuti'])->name('get.form.cuti');
         Route::get('/form-ubah-cuti',[CutiManagementController::class,'formubahcuti'])->name('form.ubah.cuti');
+        Route::get('/users-management', [UserManagementController::class, 'pageuser'])->name('page.user');
+       
+     
+        // * Hapus User
+        Route::post('delete-user/{id}',[UserManagementController::class,'destroy'])->name('destroy.user');
+        // * Get form Cuti
+                // #NOTE: function hasil semua data cuti user ada di sini 
+
+        Route::get('/list-cuti-users',[CutiManagementController::class,'showListCuti'])->name('get.list.cuti.user');
+
+        Route::get('/tambah-cuti', [CutiManagementController::class,'formTambahCuti'])->name('form.tambah.cuti');
         Route::post('/tambah-cuti',[CutiManagementController::class,'tambahcuti'])->name('post.tambah.cuti');
-
-         // * Tabel users management
+        // *-------------------------
+        // * Tabel users management
         //  #TODO: Perbaiki route dibawah
-        Route::any('status-filter',[FilterUserController::class, 'filterStatus'])->name('filter.status');
-
-        // #NOTE: function hasil semua data cuti user ada di sini 
+        Route::any('/status-filter',[FilterUserController::class, 'filterStatus'])->name('filter.status');
+    
         Route::get('/cuti-user/{id}',function(string $id){
 
             $userCuti = App\Models\User::with('CutiUser')->where('id',$id)->get();
            return $collections = collect($userCuti);
+
         })->name('show.cuti.user');
 
-        // * Route pengajuan cuti
-        Route::post('pengajuan-cuti/{id}', [PengajuanCutiController::class,'pengajuanCuti'] )->name('pengajuan.cuti');
-
+        // * Post Route pengajuan cuti
+        Route::post('pengajuan-cuti', [PengajuanCutiController::class,'pengajuanCuti'] )->name('post.pengajuan.cuti');
+        // * Get Route Halaman Form Pengajuan CUti
+        Route::get('form-pengajuan-cuti/{name}', [PengajuanCutiController::class,'formPengajuanCuti'])->name('form.pengajuan.cuti');
     });
-
+    
     Route::group(['middleware' => 'staff', 'prefix' => 'staff'], function () {
         Route::get('/dashboard', [DashboardController::class, 'dashboardStaff'])->name('dashboard.staff');
     });
