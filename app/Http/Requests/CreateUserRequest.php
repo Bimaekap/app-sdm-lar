@@ -24,6 +24,9 @@ class CreateUserRequest extends FormRequest
         return [
             'name' => 'required',
             'email' => 'required',
+            'NIP' => 'required',
+            'divisi' => 'required',
+            'jabatan' => 'required',
             'password' => 'required',
             'role' => 'required',
         ];

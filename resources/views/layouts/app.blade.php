@@ -4,11 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" < <!-- General CSS Files -->
+
+
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
         integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="{{ asset('node_modules/izitoast/dist/css/iziToast.min.css') }}">
 
     <!-- CSS Libraries -->
     @stack('styles')
@@ -124,12 +128,13 @@
             <div class="main-sidebar sidebar-style-2">
                 <aside id="sidebar-wrapper">
                     <div class="sidebar-brand">
-                        <a href="index.html">SDM</a>
+                        <a href="#!">SDM</a>
                     </div>
                     <div class="sidebar-brand sidebar-brand-sm">
-                        <a href="index.html">SDM</a>
+                        <a href="#!">SDM</a>
                     </div>
                 </aside>
+
                 <ul class="sidebar-menu">
                     {{-- ! Sidebar superadmin --}}
                     @if(Auth::user()->role == 'superadmin')
@@ -178,29 +183,39 @@
                             <span>Pengajuan Cuti Saya</span></a>
                     </li>
                     @endif
+
                     @if (Auth::user()->role == 'staff')
                     <li class="menu-header">Home</li>
                     <li><a class="nav-link" href="{{ route('dashboard.staff') }}"><i class="fas fa-fire"></i>
                             <span>Dashboard</span></a>
                     <li class="menu-header">Cuti</li>
-                    <li><a class="nav-link" href="{{ route('pengajuan.cutiper.user', Auth::user()->id) }}"><i
+                    <li><a class="nav-link" href="{{ route('halaman.form.cuti.staff', Auth::user()->id) }}"><i
                                 class="far fa-file-alt"></i>
                             <span>History</span></a>
-                    <li><a class="nav-link" href="{{ route('form.pengajuan.cuti',Auth::user()->name) }}"><i
+                    <li class="menu-header">Izin</li>
+                    <li><a class="nav-link" href="#"><i class="far fa-file-alt"></i>
+                            <span>History</span></a>
+                    <li><a class="nav-link" href="{{ route('halaman.histori.izin.staff',Auth::user()->id) }}"><i
                                 class="far fa-file-alt"></i>
                             <span>Pengajuan</span></a>
                         @endif
+
                         @if (Auth::user()->role == 'dosen')
                     <li class="menu-header">Home</li>
                     <li><a class="nav-link" href="{{ route('dashboard.dosen') }}"><i class="fas fa-fire"></i>
                             <span>Dashboard</span></a>
                     <li class="menu-header">Cuti</li>
-                    <li><a class="nav-link" href="{{ route('pengajuan.cutiper.user',Auth::user()->id) }}"><i
-                                class="far fa-file-alt"></i>
+                    <li><a class="nav-link" href="{{ route('',Auth::user()->id) }}"><i class="far fa-file-alt"></i>
                             <span>History</span></a>
-                    <li><a class="nav-link" href="{{ route('form.pengajuan.cuti',Auth::user()->name) }}"><i
+                    <li><a class="nav-link" href="{{ route('halaman.form.cuti.dosen',Auth::user()->name) }}"><i
                                 class="far fa-file-alt"></i>
-                            <span>Pengajuan Cuti</span></a>
+                            <span>Pengajuan</span></a>
+                    <li class="menu-header">Izin</li>
+                    <li><a class="nav-link" href="#"><i class="far fa-file-alt"></i>
+                            <span>History</span></a>
+                    <li><a class="nav-link" href="{{ route('halaman.histori.izin.dosen',Auth::user()->id) }}"><i
+                                class="far fa-file-alt"></i>
+                            <span>Pengajuan</span></a>
                         @endif
 
                 </ul>
@@ -240,6 +255,7 @@
     <!-- Template JS File -->
     <script src="{{asset('assets/js/scripts.js')}}"></script>
     <script src='{{ asset(' assets/js/custom.js') }}'></script>
+
 
     <!-- Page Specific JS File -->
 </body>

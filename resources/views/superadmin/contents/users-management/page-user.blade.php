@@ -1,28 +1,35 @@
 @extends('layouts.app')
 @section('title', 'Users Management')
-
 @push('styles')
 <link rel="stylesheet" href="../node_modules/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
 <link rel="stylesheet" href="../node_modules/datatables.net-select-bs4/css/select.bootstrap4.min.css">
+<link rel="stylesheet" href="../node_modules/izitoast/dist/css/iziToast.min.css">
 @endpush
 @section('content')
 <section class="section">
     <div class="section-header">
         <h1>Managemen User</h1>
+
         <div class="section-header-breadcrumb">
             <div class="breadcrumb-item active"><a href="{{ route('dashboard.superadmin') }}">Dashboard</a></div>
             <div class="breadcrumb-item"><a href="#!">Managemen User</a></div>
+
         </div>
     </div>
     <div class="section-body">
         <h2 class="section-title">Tabel Management User</h2>
+
         <div>
             <div class="row">
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
                             <div class="table-responsive ">
-                                <a href="{{ route('page.create.user') }}" class="btn btn-primary my-3">Tambah User</a>
+
+                                <div class="d-flex">
+                                    <a href="{{ route('page.create.user') }}" class="btn btn-primary my-3">Tambah
+                                        User</a>
+                                </div>
                                 <table class="table table-striped" id="table-2">
                                     <thead>
                                         <tr>
@@ -62,10 +69,19 @@
                                                     title="Wildan Ahdian"> --}}
                                                 {{ $user->role }}
                                             </td>
-                                            {{-- #TODO: Buat Fitur Delete User --}}
-                                            <td><a href="#" class="btn btn-primary">Edit</a>
-                                                <a href="#" class="btn btn-danger">Hapus</a>
+                                            <td>
+                                                <div class="d-flex">
+                                                    <a href="{{ route('show.user',$user->id) }}"
+                                                        class="btn btn-primary">Edit</a>
+                                                    <form action="{{ route('destroy.user',$user->id) }}" method="POST">
+                                                        @csrf
+                                                        @method('post')
+                                                        <button type="submit" class="btn btn-danger">Hapus</button>
+                                                    </form>
+                                                </div>
+
                                             </td>
+
                                         </tr>
                                         @empty
                                         <tr>
@@ -81,6 +97,19 @@
             </div>
         </div>
 
+        {{-- #TODO: Perbaiki --}}
+        {{-- ! Validasi error hapus user --}}
+        @if (session('delete-message'))
+        <div class="alert alert-danger alert-dismissible show fade">
+            <div class="alert-body">
+                <button class="close" data-dismiss="alert">
+                    <span>&times;</span>
+                </button>
+                {{ session('delete-message') }}
+            </div>
+        </div>
+        @endif
+
     </div>
 </section>
 
@@ -90,6 +119,9 @@
 <script src="{{ asset('assets/datatables.net-select-bs4/js/select.bootstrap4.min.js') }}"></script>
 
 <script src="{{ asset('assets/js/page/modules-datatables.js') }}"></script>
+<script src="{{asset('node_modules/izitoast/dist/js/iziToast.min.js')}}"></script>
+<script src="{{ asset('assets/js/page/modules-toastr.js') }}"></script>
+
 @endpush
 
 

@@ -9,12 +9,22 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
+
+    /**
+     * #TODO: 
+     * [] tambah row NIP/NPWP
+     * [] tambah row Divisi
+    */
+
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('NIP/NIDN');
+            $table->enum('divisi',['staff','hrd','dosen']);
+            $table->string('jabatan');
             $table->enum('role', ['superadmin', 'admin', 'dosen', 'staff']);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
@@ -23,6 +33,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
+        
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();
             $table->string('token');
@@ -48,4 +59,5 @@ return new class extends Migration
         Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');
     }
+    
 };

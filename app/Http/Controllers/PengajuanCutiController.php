@@ -13,17 +13,17 @@ use App\Http\Requests\PengajuanCutiRequest;
 class PengajuanCutiController extends Controller
 {
     public function pengajuanCuti(Request $request)
-
     {
         /* #TODO: Fitur
-
         [x] buat file upload dan disimpan ke file storage
         [x] buat file storage berdasarkan nama folder:file_pengajuan_cuti/role/nama/data
         [x] buat pengurangan ketika users berhasil menggunakan cuti
         [x] buat validasi ketika jatah_cuti telah habis, dan hilangkan data cuti nya
-        []  aktifkan hasil validasi message sukses
+        [] buat dan sesusaikan limit user ketika menggunakan sisa cuti, dan ketika jumlah cuti sudah 0 tidak dapat memakai cuti lagi
+        [] aktifkan hasil validasi message sukses
+        ? Optional :
+        [] buat kolom input kepala divisi untuk staff dan dosen memilih kepala divisinya
         */
-        // dd($request->all());
     // ! variabel mengambil data user dari tabel relationship cuti user
     $userCuti =  User::with('CutiUser')->where('id',Auth::user()->id)->get();
     $collections = collect($userCuti);
@@ -36,7 +36,7 @@ class PengajuanCutiController extends Controller
             $fileName = $file->getClientOriginalName();
             $path = $userData->role . '/' .$userData->name.'/data';
             $fileStorage->putFileAs($userData->role . '/' .$userData->name.'/data', $file,$fileName, 'public');
-            // DB::table('insert into pengajuan_cuti', )
+
             PengajuanCuti::create([
                 'users_id' => Auth::user()->id,
                 'jenis_cuti' => $request->jenis_cuti,
@@ -61,20 +61,39 @@ class PengajuanCutiController extends Controller
             }  
         }
         }
-      
         return redirect()->back()->with('success', 'Cuti Berhasil Dipakai' );
-    
     }
     
     public function formPengajuanCuti($name)
     {
         $user = User::where('name',$name)->first();
+
+        // * Mengambil data dari cuti user
         $userCuti =  User::with('CutiUser')->where('name',$name)->get();
         $collections = collect($userCuti);
         $pengajuanCutiPerUser =  User::with('pengajuanCutiUser')->where('name',$name)->get();
-        
-        // dd($user);
-        // $userName = $user->where('name',$name)->get();
+        return view('admin.contents.cuti-management.forms.form-pengajuan-cuti',['pengajuanCutiPerUser' => $pengajuanCutiPerUser,'collections' => $collections],['user' => $user],[]);
+    }
+
+    public function formPengajuanCutiStaff($name)
+    {
+        $user = User::where('name',$name)->first();
+
+        // * Mengambil data dari cuti user
+        $userCuti =  User::with('CutiUser')->where('name',$name)->get();
+        $collections = collect($userCuti);
+        $pengajuanCutiPerUser =  User::with('pengajuanCutiUser')->where('name',$name)->get();
+        return view('admin.contents.cuti-management.forms.form-pengajuan-cuti',['pengajuanCutiPerUser' => $pengajuanCutiPerUser,'collections' => $collections],['user' => $user],[]);
+    }
+
+    public function formPengajuanCutiDosen($name)
+    {
+        $user = User::where('name',$name)->first();
+
+        // * Mengambil data dari cuti user
+        $userCuti =  User::with('CutiUser')->where('name',$name)->get();
+        $collections = collect($userCuti);
+        $pengajuanCutiPerUser =  User::with('pengajuanCutiUser')->where('name',$name)->get();
         return view('admin.contents.cuti-management.forms.form-pengajuan-cuti',['pengajuanCutiPerUser' => $pengajuanCutiPerUser,'collections' => $collections],['user' => $user],[]);
     }
 
