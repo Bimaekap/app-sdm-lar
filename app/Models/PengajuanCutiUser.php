@@ -9,6 +9,10 @@ class PengajuanCutiUser extends Model
 {
     protected $table = 'pengajuan_cuti';
 
+    /* 
+    #TODO: Prioritas
+    [] Perbaiki Fillable untuk izin approve dari setiap kepala divisi user
+    */
     protected $fillable = [
         'users_id',
         'jenis_cuti',
@@ -16,12 +20,14 @@ class PengajuanCutiUser extends Model
         'jumlah_cuti',
     ];
     
-     /**
+    
+    /**
      * The roles that belong to the PengajuanCutiUser
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function users(): BelongsToMany
+    
     {
         return $this->belongsToMany(User::class);
     }

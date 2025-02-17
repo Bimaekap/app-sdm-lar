@@ -9,10 +9,22 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
+
+    /*
+    #TODO : Repair
+    [] migrasi file dibawah untuk tambah jumlah cuti
+    */  
     public function up(): void
     {
         Schema::create('pengajuan_cuti', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('users_id')->nullable()->constrained('users')->nullOnDelete()->nullOnUpdate();
+            $table->string('jenis_cuti')->nullable();
+            $table->string('file_pengajuan')->nullable();
+            $table->string('jumlah_cuti')->nullable();
+            $table->boolean('izin_1')->default(0); /** Izin HRD */
+            $table->boolean('izin_2')->default(0); /** Izin Kepala HRD */
+            $table->boolean('izin_3')->default(0); /** Izin Kepalasa Divisi */
             $table->timestamps();
         });
     }

@@ -4,11 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" < <!-- General CSS Files -->
+
+
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
         integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="{{ asset('node_modules/izitoast/dist/css/iziToast.min.css') }}">
 
     <!-- CSS Libraries -->
     @stack('styles')
@@ -29,72 +33,6 @@
                         <li><a href="#" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i
                                     class="fas fa-search"></i></a></li>
                     </ul>
-                    {{-- <div class="search-element">
-                        <input class="form-control" type="search" placeholder="Search" aria-label="Search"
-                            data-width="250">
-                        <button class="btn" type="submit"><i class="fas fa-search"></i></button>
-                        <div class="search-backdrop"></div>
-                        <div class="search-result">
-                            <div class="search-header">
-                                Histories
-                            </div>
-                            <div class="search-item">
-                                <a href="#">How to hack NASA using CSS</a>
-                                <a href="#" class="search-close"><i class="fas fa-times"></i></a>
-                            </div>
-                            <div class="search-item">
-                                <a href="#">Kodinger.com</a>
-                                <a href="#" class="search-close"><i class="fas fa-times"></i></a>
-                            </div>
-                            <div class="search-item">
-                                <a href="#">#Stisla</a>
-                                <a href="#" class="search-close"><i class="fas fa-times"></i></a>
-                            </div>
-                            <div class="search-header">
-                                Result
-                            </div>
-                            <div class="search-item">
-                                <a href="#">
-                                    <img class="mr-3 rounded" width="30" src="../assets/img/products/product-3-50.png"
-                                        alt="product">
-                                    oPhone S9 Limited Edition
-                                </a>
-                            </div>
-                            <div class="search-item">
-                                <a href="#">
-                                    <img class="mr-3 rounded" width="30" src="../assets/img/products/product-2-50.png"
-                                        alt="product">
-                                    Drone X2 New Gen-7
-                                </a>
-                            </div>
-                            <div class="search-item">
-                                <a href="#">
-                                    <img class="mr-3 rounded" width="30" src="../assets/img/products/product-1-50.png"
-                                        alt="product">
-                                    Headphone Blitz
-                                </a>
-                            </div>
-                            <div class="search-header">
-                                Projects
-                            </div>
-                            <div class="search-item">
-                                <a href="#">
-                                    <div class="search-icon bg-danger text-white mr-3">
-                                        <i class="fas fa-code"></i>
-                                    </div>
-                                    Stisla Admin Template
-                                </a>
-                            </div>
-                            <div class="search-item">
-                                <a href="#">
-                                    <div class="search-icon bg-primary text-white mr-3">
-                                        <i class="fas fa-laptop"></i>
-                                    </div>
-                                    Create a new Homepage Design
-                                </a>
-                            </div>
-                        </div>
-                    </div> --}}
                 </form>
                 <ul class="navbar-nav navbar-right">
 
@@ -124,12 +62,13 @@
             <div class="main-sidebar sidebar-style-2">
                 <aside id="sidebar-wrapper">
                     <div class="sidebar-brand">
-                        <a href="index.html">SDM</a>
+                        <a href="#!">SDM</a>
                     </div>
                     <div class="sidebar-brand sidebar-brand-sm">
-                        <a href="index.html">SDM</a>
+                        <a href="#!">SDM</a>
                     </div>
                 </aside>
+
                 <ul class="sidebar-menu">
                     {{-- ! Sidebar superadmin --}}
                     @if(Auth::user()->role == 'superadmin')
@@ -178,31 +117,47 @@
                             <span>Pengajuan Cuti Saya</span></a>
                     </li>
                     @endif
+
                     @if (Auth::user()->role == 'staff')
                     <li class="menu-header">Home</li>
                     <li><a class="nav-link" href="{{ route('dashboard.staff') }}"><i class="fas fa-fire"></i>
                             <span>Dashboard</span></a>
                     <li class="menu-header">Cuti</li>
-                    <li><a class="nav-link" href="{{ route('pengajuan.cutiper.user', Auth::user()->id) }}"><i
-                                class="far fa-file-alt"></i>
-                            <span>History</span></a>
-                    <li><a class="nav-link" href="{{ route('form.pengajuan.cuti',Auth::user()->name) }}"><i
+                    <li><a class="nav-link" href="{{ route('halaman.form.cuti.staff', Auth::user()->id) }}"><i
                                 class="far fa-file-alt"></i>
                             <span>Pengajuan</span></a>
+                    <li><a class="nav-link" href="{{ route('halaman.histori.cuti.staff', Auth::user()->id) }}"><i
+                                class="far fa-file-alt"></i>
+                            <span>History</span></a>
+                    <li class="menu-header">Izin</li>
+                    <li><a class="nav-link" href="{{ route('halaman.form.izin.staff',Auth::user()->id) }}"><i
+                                class="far fa-file-alt"></i>
+                            <span>Pengajuan</span></a>
+                    <li><a class="nav-link" href="{{ route('halaman.histori.izin.staff',Auth::user()->id) }}"><i
+                                class="far fa-file-alt"></i>
+                            <span>History</span></a>
+
                         @endif
+
                         @if (Auth::user()->role == 'dosen')
                     <li class="menu-header">Home</li>
                     <li><a class="nav-link" href="{{ route('dashboard.dosen') }}"><i class="fas fa-fire"></i>
                             <span>Dashboard</span></a>
                     <li class="menu-header">Cuti</li>
-                    <li><a class="nav-link" href="{{ route('pengajuan.cutiper.user',Auth::user()->id) }}"><i
+                    <li><a class="nav-link" href="{{ route('halaman.form.cuti.dosen',Auth::user()->id) }}"><i
+                                class="far fa-file-alt"></i>
+                            <span>Pengajuan</span></a>
+                    <li><a class="nav-link" href="{{ route('halaman.histori.cuti.dosen',Auth::user()->name) }}"><i
                                 class="far fa-file-alt"></i>
                             <span>History</span></a>
-                    <li><a class="nav-link" href="{{ route('form.pengajuan.cuti',Auth::user()->name) }}"><i
+                    <li class="menu-header">Izin</li>
+                    <li><a class="nav-link" href="{{ route('halaman.form.izin.dosen',Auth::user()->id) }}"><i
                                 class="far fa-file-alt"></i>
-                            <span>Pengajuan Cuti</span></a>
+                            <span>Pengajuan</span></a>
+                    <li><a class="nav-link" href="{{ route('halaman.histori.izin.dosen',Auth::user()->id) }}"><i
+                                class="far fa-file-alt"></i>
+                            <span>History</span></a>
                         @endif
-
                 </ul>
             </div>
             <!-- Main Content -->
@@ -240,6 +195,7 @@
     <!-- Template JS File -->
     <script src="{{asset('assets/js/scripts.js')}}"></script>
     <script src='{{ asset(' assets/js/custom.js') }}'></script>
+
 
     <!-- Page Specific JS File -->
 </body>

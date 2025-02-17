@@ -6,7 +6,7 @@
     <div class="section-header">
         <h1>Pengajuan Cuti</h1>
         <div class="section-header-breadcrumb">
-            <div class="breadcrumb-item active"><a href="{{ route('dashboard.admin') }}">Dashboard</a></div>
+            <div class="breadcrumb-item active"><a href="{{ route('dashboard.staff') }}">Dashboard</a></div>
             <div class="breadcrumb-item"><a href="#!">Pengajuan Cuti</a></div>
         </div>
     </div>
@@ -17,7 +17,7 @@
     --}}
     <div class="row">
         <div class="col-12 col-md-6 col-lg-6">
-            <form action="{{ route('post.pengajuan.cuti') }}" enctype="multipart/form-data" method="POST">
+            <form action="{{ route('post.pengajuan.cuti.staff') }}" enctype="multipart/form-data" method="POST">
                 @csrf
                 @method('POST')
                 <div class="card">

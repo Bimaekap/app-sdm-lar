@@ -31,10 +31,8 @@
     </ol>
 </nav>
 
-{{-- #TODO: Pengajuan cuti --}}
 
 
-{{-- <p class="text-white">pengajuan cuti</p> --}}
 
 <div class="container">
 

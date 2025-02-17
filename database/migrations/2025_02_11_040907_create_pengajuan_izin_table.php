@@ -11,21 +11,21 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pengajuan_cuti', function (Blueprint $table) {
+        Schema::create('pengajuan_izin', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('users_id')->constrained('users')->noActionOnDelete()->noActionOnUpdate();
-            $table->string('jenis_cuti');
-            $table->string('file_pengajuan');
-            $table->string('jumlah_cuti');
+            $table->foreignId('users_id')->nullable()->constrained('users')->nullOnDelete()->nullOnUpdate();
+            $table->string('alasan')->nullable();
+            $table->string('file_pengajuan')->nullable();
             $table->timestamps();
         });
     }
 
+    
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('pengajuan_cuti');
+        Schema::dropIfExists('pengajuan_izin');
     }
 };

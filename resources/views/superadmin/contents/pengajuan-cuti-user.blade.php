@@ -22,7 +22,6 @@
                                 <table class="table table-striped" id="table-2">
                                     <thead>
                                         <tr>
-
                                             <th>Nama</th>
                                             <th>Divisi</th>
                                             <th>Jenis Cuti</th>

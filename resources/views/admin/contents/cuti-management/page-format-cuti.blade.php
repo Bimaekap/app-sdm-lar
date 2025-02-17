@@ -49,7 +49,6 @@
                     <table class="table table-striped" id="table-2">
                         <thead>
                             <tr>
-
                                 <th>Jenis Cuti</th>
                                 <th>Jumlah Cuti</th>
                                 <th>Status</th>
@@ -58,7 +57,6 @@
                         </thead>
                         <tbody>
                             @foreach ($kategoriCuti as $item)
-
                             <tr>
                                 <td>
                                     {{ $item->jenis_cuti }}
@@ -83,8 +81,16 @@
         </div>
     </div>
 </section>
-
-
+@if (\Session::has('messages'))
+<div class="alert alert-success alert-dismissible show fade">
+    <div class="alert-body">
+        <button class="close" data-dismiss="alert">
+            <span>&times;</span>
+        </button>
+        {!! \Session::get('messages') !!}
+    </div>
+</div>
+@endif
 @push('scripts')
 <script src="{{ asset('assets/datatables/media/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('assets/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
