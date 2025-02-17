@@ -17,7 +17,6 @@ class FilterUserController extends Controller
     {
         $data['data'] = $data;
         $filterStatus = User::get()->where($request->filter,0);
-        dd($data);
         return redirect()->route('page.format.cuti', ['filterStatus' => $filterStatus, 'data' => $data]);
     }
 }

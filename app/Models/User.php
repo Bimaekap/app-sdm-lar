@@ -59,6 +59,15 @@ class User extends Authenticatable
     }
 
     /**
+     * Get all of the CutiIzin for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function CutiIzin(): HasMany
+    {
+        return $this->hasMany(CutiIzin::class, 'user_id');
+    }
+    /**
      * Get the user associated with the User
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
@@ -77,4 +86,16 @@ class User extends Authenticatable
     {
         return $this->hasMany(PengajuanCutiUser::class,'users_id');
     }
+
+    /**
+     * Get all of the pengajuanIzinUser for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function pengajuanIzinUser(): HasMany
+    {
+        return $this->hasMany(PengajuanIzinUser::class, 'users_id');
+    }
 }
+
+

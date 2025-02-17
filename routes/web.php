@@ -35,7 +35,8 @@ Route::middleware('auth')->group(function () {
     Route::group(['middleware' => 'superadmin', 'prefix' => 'superadmin'], function () {
         Route::get('/dashboard', [DashboardController::class, 'dashboardSuperAdmin'])->name('dashboard.superadmin');
         Route::get('/users-management', [UserManagementController::class, 'pageuser'])->name('page.user');
-        // * Users Management
+        
+        // * Users Management Create
         Route::get('create-newuser',[UserManagementController::class,'pagecreateuser'])->name('page.create.user');
         Route::post('create-user', [UserManagementController::class, 'create'])->name('create.user');
         // --------------------------------
@@ -89,11 +90,17 @@ Route::middleware('auth')->group(function () {
         // * Halaman Pengajuan Cuti
         Route::get('/cuti-staff/{name}',[PengajuanCutiStaffController::class,'halamanFormCutiStaff'])->name('halaman.form.cuti.staff');
         Route::get('/history-cuti-staff/{id}',[PengajuanCutiStaffController::class,'halamanHistoriCutiStaff'])->name('halaman.histori.cuti.staff');
+        // * CRUD
+        Route::post('pengajuan-cuti', [PengajuanCutiStaffController::class,'pengajuanCuti'] )->name('post.pengajuan.cuti.staff');
+
         // -----------------
         // * Halaman Pengajuan Izin
-        Route::get('/izin-staff/{name}',[PengajuanIzinStaffController::class,'halamanFormIzinStaff'])->name('halaman.izin.staff');
-        Route::get('/history-staff/{name}',[PengajuanIzinStaffController::class,'halamanHistoriIzinStaff'])->name('halaman.izin.staff');
+        Route::get('/izin-staff/{name}',[PengajuanIzinStaffController::class,'halamanFormIzinStaff'])->name('halaman.form.izin.staff');
+        Route::get('/history-izin-staff/{name}',[PengajuanIzinStaffController::class,'halamanHistoriIzinStaff'])->name('halaman.histori.izin.staff');
         // ------------------------
+        // * CRUD
+        Route::post('/create-izin', [PengajuanIzinStaffController::class,'pengajuanIzin'])->name('post.pengajuan.izin.staff');
+
     });
 
     Route::group(['middleware' => 'dosen', 'prefix' => 'dosen'], function () {
@@ -105,8 +112,11 @@ Route::middleware('auth')->group(function () {
         Route::get('/history-cuti-dosen/{id}',[PengajuanCutiDosenController::class,'halamanHistoriCutiDosen'])->name('halaman.histori.cuti.dosen');
 
         // * Halaman Pengajuan Izin
-        Route::get('/izin-dosen/{name}',[PengajuanIzinDosenController::class,'halamanFormIzinDosen'])->name('halaman.histori.izin.dosen');
+        Route::get('/izin-dosen/{name}',[PengajuanIzinDosenController::class,'halamanFormIzinDosen'])->name('halaman.form.izin.dosen');
         Route::get('/history-dosen/{name}',[PengajuanIzinDosenController::class,'halamanHistoriIzinDosen'])->name('halaman.histori.izin.dosen');
         // -------------------------
+        // * CRUD
+        Route::post('/create-izin', [PengajuanIzinDosenController::class,'pengajuanIzin'])->name('post.pengajuan.izin.dosen');
     });
+
 });

@@ -15,7 +15,7 @@
 
     <div class="row">
         <div class="col-12 col-md-12 col-lg-12">
-            <form action="{{ route('post.pengajuan.cuti') }}" enctype="multipart/form-data" method="POST">
+            <form action="{{ route('post.pengajuan.izin.dosen') }}" enctype="multipart/form-data" method="POST">
                 @csrf
                 @method('POST')
                 <div class="card">
@@ -49,7 +49,7 @@
                         </div>
                         <div class="form-group">
                             <label>Alasan</label>
-                            <textarea class="form-control"></textarea>
+                            <textarea class="form-control" name="alasan"></textarea>
                         </div>
                     </div>
 

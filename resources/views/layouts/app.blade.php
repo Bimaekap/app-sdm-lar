@@ -33,72 +33,6 @@
                         <li><a href="#" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i
                                     class="fas fa-search"></i></a></li>
                     </ul>
-                    {{-- <div class="search-element">
-                        <input class="form-control" type="search" placeholder="Search" aria-label="Search"
-                            data-width="250">
-                        <button class="btn" type="submit"><i class="fas fa-search"></i></button>
-                        <div class="search-backdrop"></div>
-                        <div class="search-result">
-                            <div class="search-header">
-                                Histories
-                            </div>
-                            <div class="search-item">
-                                <a href="#">How to hack NASA using CSS</a>
-                                <a href="#" class="search-close"><i class="fas fa-times"></i></a>
-                            </div>
-                            <div class="search-item">
-                                <a href="#">Kodinger.com</a>
-                                <a href="#" class="search-close"><i class="fas fa-times"></i></a>
-                            </div>
-                            <div class="search-item">
-                                <a href="#">#Stisla</a>
-                                <a href="#" class="search-close"><i class="fas fa-times"></i></a>
-                            </div>
-                            <div class="search-header">
-                                Result
-                            </div>
-                            <div class="search-item">
-                                <a href="#">
-                                    <img class="mr-3 rounded" width="30" src="../assets/img/products/product-3-50.png"
-                                        alt="product">
-                                    oPhone S9 Limited Edition
-                                </a>
-                            </div>
-                            <div class="search-item">
-                                <a href="#">
-                                    <img class="mr-3 rounded" width="30" src="../assets/img/products/product-2-50.png"
-                                        alt="product">
-                                    Drone X2 New Gen-7
-                                </a>
-                            </div>
-                            <div class="search-item">
-                                <a href="#">
-                                    <img class="mr-3 rounded" width="30" src="../assets/img/products/product-1-50.png"
-                                        alt="product">
-                                    Headphone Blitz
-                                </a>
-                            </div>
-                            <div class="search-header">
-                                Projects
-                            </div>
-                            <div class="search-item">
-                                <a href="#">
-                                    <div class="search-icon bg-danger text-white mr-3">
-                                        <i class="fas fa-code"></i>
-                                    </div>
-                                    Stisla Admin Template
-                                </a>
-                            </div>
-                            <div class="search-item">
-                                <a href="#">
-                                    <div class="search-icon bg-primary text-white mr-3">
-                                        <i class="fas fa-laptop"></i>
-                                    </div>
-                                    Create a new Homepage Design
-                                </a>
-                            </div>
-                        </div>
-                    </div> --}}
                 </form>
                 <ul class="navbar-nav navbar-right">
 
@@ -191,13 +125,18 @@
                     <li class="menu-header">Cuti</li>
                     <li><a class="nav-link" href="{{ route('halaman.form.cuti.staff', Auth::user()->id) }}"><i
                                 class="far fa-file-alt"></i>
+                            <span>Pengajuan</span></a>
+                    <li><a class="nav-link" href="{{ route('halaman.histori.cuti.staff', Auth::user()->id) }}"><i
+                                class="far fa-file-alt"></i>
                             <span>History</span></a>
                     <li class="menu-header">Izin</li>
-                    <li><a class="nav-link" href="#"><i class="far fa-file-alt"></i>
-                            <span>History</span></a>
-                    <li><a class="nav-link" href="{{ route('halaman.histori.izin.staff',Auth::user()->id) }}"><i
+                    <li><a class="nav-link" href="{{ route('halaman.form.izin.staff',Auth::user()->id) }}"><i
                                 class="far fa-file-alt"></i>
                             <span>Pengajuan</span></a>
+                    <li><a class="nav-link" href="{{ route('halaman.histori.izin.staff',Auth::user()->id) }}"><i
+                                class="far fa-file-alt"></i>
+                            <span>History</span></a>
+
                         @endif
 
                         @if (Auth::user()->role == 'dosen')
@@ -205,19 +144,20 @@
                     <li><a class="nav-link" href="{{ route('dashboard.dosen') }}"><i class="fas fa-fire"></i>
                             <span>Dashboard</span></a>
                     <li class="menu-header">Cuti</li>
-                    <li><a class="nav-link" href="{{ route('',Auth::user()->id) }}"><i class="far fa-file-alt"></i>
-                            <span>History</span></a>
-                    <li><a class="nav-link" href="{{ route('halaman.form.cuti.dosen',Auth::user()->name) }}"><i
+                    <li><a class="nav-link" href="{{ route('halaman.form.cuti.dosen',Auth::user()->id) }}"><i
                                 class="far fa-file-alt"></i>
                             <span>Pengajuan</span></a>
-                    <li class="menu-header">Izin</li>
-                    <li><a class="nav-link" href="#"><i class="far fa-file-alt"></i>
+                    <li><a class="nav-link" href="{{ route('halaman.histori.cuti.dosen',Auth::user()->name) }}"><i
+                                class="far fa-file-alt"></i>
                             <span>History</span></a>
+                    <li class="menu-header">Izin</li>
+                    <li><a class="nav-link" href="{{ route('halaman.form.izin.dosen',Auth::user()->id) }}"><i
+                                class="far fa-file-alt"></i>
+                            <span>Pengajuan</span></a>
                     <li><a class="nav-link" href="{{ route('halaman.histori.izin.dosen',Auth::user()->id) }}"><i
                                 class="far fa-file-alt"></i>
-                            <span>Pengajuan</span></a>
+                            <span>History</span></a>
                         @endif
-
                 </ul>
             </div>
             <!-- Main Content -->

@@ -55,7 +55,6 @@ class CutiManagementController extends Controller
          [x] Buat fitur otomatis untuk menambahkan kategori_cuti ke semua users yang terdaftar pada table cuti_user
          [x] Buat Validasi Message Berhasil Buat Cuti Baru
          []  buatvalidasi message berhasil dan gagal buat cuti
-         [] perbaiki ketik
          [] Terima data kategori cuti yang sudah pasti untuk form validasi dari hrd
         */
         $cuti = new KategoriCuti();

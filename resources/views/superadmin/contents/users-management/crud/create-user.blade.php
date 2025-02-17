@@ -19,22 +19,13 @@
                 <div class="alert alert-info">
                     <b>Note!</b> Form ini di gunakan untuk membuat user baru
                 </div>
-
                 <div class="form-group">
                     <label>Nama</label>
                     <input type="text" name="name" class="form-control">
                 </div>
                 <div class="form-group">
                     <label>NIP/NIDN</label>
-                    <input type="text" name="NIP" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label>Divisi</label>
-                    <select class="form-control" name="divisi">
-                        <option value="staff">Staff</option>
-                        <option value="hrd">HRD</option>
-                        <option value="dosen">Dosen</option>
-                    </select>
+                    <input type="text" name="nomor_pokok_pegawai" class="form-control">
                 </div>
                 <div class="form-group">
                     <label>Email</label>
@@ -46,15 +37,20 @@
                 </div>
                 <div class="form-group">
                     <label>Jabatan</label>
-                    <input type="password" name="jabatan" class="form-control">
+                    <select class="form-control" name="jabatan">
+                        <option value="staff">Staff</option>
+                        <option value="dosen">Dosen</option>
+                        <option value="hrd">HRD</option>
+                        <option value="kepala_divisi">Kepala Divisi</option>
+                    </select>
                 </div>
                 <div class="form-group">
                     <label>Role</label>
                     <select class="form-control" name="role">
                         <option value="superadmin">Superadmin</option>
-                        <option value="Admin">Admin</option>
-                        <option value="Staff">Staff</option>
-                        <option value="Dosen">Dosen</option>
+                        <option value="admin">Admin</option>
+                        <option value="staff">Staff</option>
+                        <option value="dosen">Dosen</option>
                     </select>
                 </div>
             </div>
@@ -63,7 +59,6 @@
                 {{-- <button class="btn btn-secondary" type="reset">Reset</button> --}}
             </div>
         </form>
-
     </div>
 </section>
 @endsection

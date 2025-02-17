@@ -22,10 +22,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('NIP/NIDN');
-            $table->enum('divisi',['staff','hrd','dosen']);
+            $table->string('nomor_pokok_pegawai');
             $table->string('jabatan');
-            $table->enum('role', ['superadmin', 'admin', 'dosen', 'staff']);
+            $table->enum('role', ['superadmin', 'admin', 'dosen', 'staff','kepala_divisi']);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->boolean('status_validasi');
@@ -33,7 +32,6 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();
             $table->string('token');
