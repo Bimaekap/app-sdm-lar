@@ -30,13 +30,9 @@ class UserManagementController extends Controller
     // * Function Buat User Baru
     public function create(CreateUserRequest $request): RedirectResponse
     {
-        // dd($request->all());
         /*
         #TODO : 
-        [x] Berikan Status Validasi :default 0 ketika selesai membuat akun user baru.
-        [x] Ketika buat users otomatis semua cuti otomatis ditambah pada tabel cuti_user
-        [x] save 2 model untuk tabel users dan cuti_user
-        [x] buat modal untuk update semua users ketika hrd menambah data cuti
+        [] buat input untuk mengisi jabatan sebuah kepala
         [] Buat Validasi Message Ketika berhasil tambah user
         */
         $datacuti = KategoriCuti::select(['jenis_cuti','jumlah_cuti'])->get()->all();
@@ -45,6 +41,7 @@ class UserManagementController extends Controller
         $newUser['email'] = $request->email;
         $newUser['nomor_pokok_pegawai'] = $request->nomor_pokok_pegawai;
         $newUser['jabatan'] = $request->jabatan;
+        $newUser['jabatan_pimpinan'] = $request->jabatan_pimpinan;
         $newUser['role'] = $request->role;
         $newUser['password'] = $request->password;
         $newUser['status_validasi'] = 0;

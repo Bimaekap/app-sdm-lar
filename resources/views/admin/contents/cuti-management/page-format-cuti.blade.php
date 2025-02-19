@@ -1,6 +1,3 @@
-{{-- #TODO: Kerjaan --}}
-
-
 @extends('layouts.app')
 @section('title', 'Format Cuti')
 @push('styles')
@@ -18,32 +15,17 @@
         </div>
     </div>
     <h2 class="section-title">Pengaturan Menu Cuti</h2>
-    {{-- <div class="card">
-        <div class="card-header">
-            <h4>Daftar Cuti Aktif</h4>
-            <hr class="">
-        </div>
-        <ul class="list-group">
-            @foreach ($kategoriCuti as $item)
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                {{ $item->jenis_cuti }}
-                <span class="badge badge-primary badge-pill">
-                    {{ $item->jumlah_cuti }}
-                </span>
-            </li>
-            @endforeach
-        </ul>
-    </div> --}}
 
     {{-- !Tambah Tabel --}}
 
     <div class="col-12">
         <div class="card">
-            <div class="card-header">
+            <div class="card-header d-flex justify-content-between">
                 <a href="{{ route('form.tambah.cuti')}}" class="btn btn-primary my-3">Tambah
                     Cuti</a>
 
             </div>
+
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-striped" id="table-2">

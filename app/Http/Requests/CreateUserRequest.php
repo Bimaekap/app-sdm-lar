@@ -26,6 +26,7 @@ class CreateUserRequest extends FormRequest
             'email' => 'required',
             'nomor_pokok_pegawai' => 'required',
             'jabatan' => 'required',
+            'jabatan_pimpinan',
             'password' => 'required',
             'role' => 'required',
         ];

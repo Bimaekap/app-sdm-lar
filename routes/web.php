@@ -14,6 +14,7 @@ use App\Http\Controllers\PengajuanCutiDosenController;
 use App\Http\Controllers\PengajuanCutiStaffController;
 use App\Http\Controllers\PengajuanIzinDosenController;
 use App\Http\Controllers\PengajuanIzinStaffController;
+use App\Http\Controllers\PengajuanPermohonanCutiIzinUser;
 
 // * Index / Login
 Route::get('/',  function () {
@@ -98,6 +99,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/izin-staff/{name}',[PengajuanIzinStaffController::class,'halamanFormIzinStaff'])->name('halaman.form.izin.staff');
         Route::get('/history-izin-staff/{name}',[PengajuanIzinStaffController::class,'halamanHistoriIzinStaff'])->name('halaman.histori.izin.staff');
         // ------------------------
+            // * Halaman permohonan cuti anggota
+            Route::get('/validasi-cuti-anggota-staff',[PengajuanPermohonanCutiIzinUser::class,'halamanPengajuanPermohonanStaff'])->name('halaman.permohonan.validasi.staff');
+            // -----------------
         // * CRUD
         Route::post('/create-izin', [PengajuanIzinStaffController::class,'pengajuanIzin'])->name('post.pengajuan.izin.staff');
 
@@ -115,6 +119,12 @@ Route::middleware('auth')->group(function () {
         Route::get('/izin-dosen/{name}',[PengajuanIzinDosenController::class,'halamanFormIzinDosen'])->name('halaman.form.izin.dosen');
         Route::get('/history-dosen/{name}',[PengajuanIzinDosenController::class,'halamanHistoriIzinDosen'])->name('halaman.histori.izin.dosen');
         // -------------------------
+        // * Halaman permohonan cuti anggota
+        Route::get('/validasi-cuti-anggota-dosen',[PengajuanPermohonanCutiIzinUser::class,'halamanPengajuanPermohonanDosen'])->name('halaman.permohonan.validasi.dosen');
+        // ! Validasi
+        Route::post('/validasi-dosen',[PengajuanPermohonanCutiIzinUser::class,'terimaPengajuanPermohonanUser'])->name('post.validasi.permohonan');
+        // -----------------
+        
         // * CRUD
         Route::post('/create-izin', [PengajuanIzinDosenController::class,'pengajuanIzin'])->name('post.pengajuan.izin.dosen');
     });

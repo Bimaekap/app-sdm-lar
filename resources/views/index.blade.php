@@ -46,19 +46,33 @@
                                     <div class="form-group">
                                         <label for="email">Email</label>
                                         <input id="email" type="email" name="email" placeholder="Masukkan Email"
-                                            class="form-control" name="email" tabindex="1" required autofocus>
+                                            class="form-control" name="email" value="{{ old('email') }}" required
+                                            tabindex="1" autofocus>
                                         <div class="invalid-feedback">
-                                            Please fill in your email
+                                            masukkan email anda
                                         </div>
-                                    </div>
 
+                                    </div>
                                     <div class="form-group">
                                         <input id="password" type="password" placeholder="Masukkan Password"
                                             name="password" class="form-control" name="password" tabindex="2" required>
+                                        @error('email')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                         <div class="invalid-feedback">
-                                            please fill in your password
+                                            password tidak boleh kosong
                                         </div>
                                     </div>
+                                    @if ($errors->has('message'))
+                                    <div class="alert mt-2 alert-danger  text-wrap alert-dismissible show fade">
+                                        <div class="alert-body " style="font-size: 0.8rem">
+                                            <button class="close" data-dismiss="alert">
+                                                <span>&times;</span>
+                                            </button>
+                                            {{ $errors->first('message') }}
+                                        </div>
+                                    </div>
+                                    @endif
                                     {{--
                                     <div class="form-group">
                                         <div class="custom-control custom-checkbox">

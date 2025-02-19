@@ -57,9 +57,12 @@
 
                         <div class="form-group">
                             <label>Kepala Divisi</label>
-                            <select class="form-control" name="jenis_cuti">
+                            <select class="form-control" name="kepala_divisi">
                                 {{-- Looping --}}
                                 <option>Pilih Kepala Divisi</option>
+                                @foreach ($kepalaDivisi as $item)
+                                <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="form-group">

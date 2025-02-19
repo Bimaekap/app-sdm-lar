@@ -10,12 +10,6 @@ return new class extends Migration
      * Run the migrations.
      */
 
-    /**
-     * #TODO: 
-     * [] tambah row NIP/NPWP
-     * [] tambah row Divisi
-    */
-
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
@@ -24,6 +18,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('nomor_pokok_pegawai');
             $table->string('jabatan');
+            $table->string('jabatan_pimpinan')->nullable();
             $table->enum('role', ['superadmin', 'admin', 'dosen', 'staff','kepala_divisi']);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
         integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="{{ asset('node_modules/izitoast/dist/css/iziToast.min.css') }}">
+
 
     <!-- CSS Libraries -->
     @stack('styles')
@@ -122,6 +122,10 @@
                     <li class="menu-header">Home</li>
                     <li><a class="nav-link" href="{{ route('dashboard.staff') }}"><i class="fas fa-fire"></i>
                             <span>Dashboard</span></a>
+                    <li class="menu-header">Permohon Cuti Anggota</li>
+                    <li><a class="nav-link" href="{{ route('halaman.permohonan.validasi.staff') }}"><i
+                                class="far fa-file-alt"></i>
+                            <span>Data</span></a>
                     <li class="menu-header">Cuti</li>
                     <li><a class="nav-link" href="{{ route('halaman.form.cuti.staff', Auth::user()->id) }}"><i
                                 class="far fa-file-alt"></i>
@@ -143,6 +147,10 @@
                     <li class="menu-header">Home</li>
                     <li><a class="nav-link" href="{{ route('dashboard.dosen') }}"><i class="fas fa-fire"></i>
                             <span>Dashboard</span></a>
+                    <li class="menu-header">Permohon Cuti Anggota</li>
+                    <li><a class="nav-link" href="{{ route('halaman.permohonan.validasi.dosen') }}"><i
+                                class="far fa-file-alt"></i>
+                            <span>Data</span></a>
                     <li class="menu-header">Cuti</li>
                     <li><a class="nav-link" href="{{ route('halaman.form.cuti.dosen',Auth::user()->id) }}"><i
                                 class="far fa-file-alt"></i>
@@ -194,7 +202,7 @@
 
     <!-- Template JS File -->
     <script src="{{asset('assets/js/scripts.js')}}"></script>
-    <script src='{{ asset(' assets/js/custom.js') }}'></script>
+    <script src="{{ asset('assets/js/custom.js') }}""></script>
 
 
     <!-- Page Specific JS File -->

@@ -52,9 +52,6 @@ class CutiManagementController extends Controller
     public function tambahcuti(Request $request) : RedirectResponse
     {
         /*  #TODO: Prioritas 
-         [x] Buat fitur otomatis untuk menambahkan kategori_cuti ke semua users yang terdaftar pada table cuti_user
-         [x] Buat Validasi Message Berhasil Buat Cuti Baru
-         []  buatvalidasi message berhasil dan gagal buat cuti
          [] Terima data kategori cuti yang sudah pasti untuk form validasi dari hrd
         */
         $cuti = new KategoriCuti();
@@ -78,7 +75,6 @@ class CutiManagementController extends Controller
                 'status' => 1
             ]);
         }
-      
         $users = collect(User::all('id'));
 
         foreach($users as $userId){
@@ -93,7 +89,8 @@ class CutiManagementController extends Controller
         $namaCuti = Str::title($request->jenis_cuti);
         // -----------------------------------------
         // !NOTE
-        return redirect()->back()->with('messages', 'Jenis Cuti '.$namaCuti.' Disimpan');
+        session()->flash('success', 'Berhasil Tambah Cuti Baru');
+        return redirect()->back();
         
     }
 

@@ -1,3 +1,4 @@
+
 "use strict";
 
 $("#toastr-1").click(function() {
@@ -63,3 +64,4 @@ $("#toastr-8").click(function() {
     position: 'topCenter' 
   });
 });
+

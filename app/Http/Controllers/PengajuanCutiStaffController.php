@@ -12,12 +12,12 @@ class PengajuanCutiStaffController extends Controller
     public function halamanFormCutiStaff($id)
     {
         $user = User::where('id',$id)->first();
-
+        $kepalaDivisi = DB::table('users')->whereNotNull('jabatan_pimpinan')->get();
         $tableCutiUser = DB::table('cuti_user')->get();
         // dd($tableCutiUser);
         $userCuti =  User::with('CutiUser')->where('id',$id)->get();
         $collections = collect($userCuti);
-        return view('staff.contents.cuti-management.forms.form-pengajuan-cuti',['collections'=> $collections,'user' => $user],['tableCutiUser' => $tableCutiUser]);
+        return view('staff.contents.cuti-management.forms.form-pengajuan-cuti',['collections'=> $collections,'user' => $user,'kepalaDivisi' => $kepalaDivisi],['tableCutiUser' => $tableCutiUser]);
     }
 
       // * Halaman Melihat Hasil Pengajuan Cuti User Berdasarkan ID

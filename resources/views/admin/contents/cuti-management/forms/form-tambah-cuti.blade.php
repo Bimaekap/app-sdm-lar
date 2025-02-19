@@ -22,8 +22,8 @@
                 <div class="form-group">
                     <label>Nama Cuti</label>
                     <input type="text" name="jenis_cuti" class="form-control">
-                    @if($errors->has('jenis_cuti'))
-                    <div class="alert alert-danger alert-dismissible show fade mt-5 w-25">
+                    @error('jenis_cuti')
+                    <div class="alert alert-danger alert-dismissible show fade mt-1 w-25" style="font-size: 0.8rem">
                         <div class="alert-body">
                             <button class="close" data-dismiss="alert">
                                 <span>&times;</span>
@@ -31,8 +31,7 @@
                             {{ $errors->first('jenis_cuti') }}
                         </div>
                     </div>
-                    @endif
-
+                    @enderror
                 </div>
                 <div class="form-group">
                     <label>Total Cuti</label>
@@ -40,16 +39,16 @@
                         <span>Total cuti yang sesuai dengan peraturan SDM</span>
                     </div>
                     <input type="number" name="jumlah_cuti" placeholder="hari" min="1" class="form-control">
-                    @if($errors->has('jumlah_cuti'))
-                    <div class="alert alert-danger alert-dismissible show fade mt-5  w-25">
+                    @error('jumlah_cuti')
+                    <div class="alert alert-danger alert-dismissible show fade mt-1 w-25" style="font-size: 0.8rem">
                         <div class="alert-body">
                             <button class="close" data-dismiss="alert">
                                 <span>&times;</span>
                             </button>
-                            {{ $errors->first('jumlah_cuti') }}
+                            {{ $errors->first('jenis_cuti') }}
                         </div>
                     </div>
-                    @endif
+                    @enderror
 
                 </div>
 
@@ -70,7 +69,16 @@
 
     </div>
 
-
+    @if(session('success'))
+    <div class="alert alert-success alert-dismissible show fade">
+        <div class="alert-body">
+            <button class="close" data-dismiss="alert">
+                <span>&times;</span>
+            </button>
+            {{session('success')}}
+        </div>
+    </div>
+    @endif
 </section>
 
 @push('name')

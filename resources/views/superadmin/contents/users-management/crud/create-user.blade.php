@@ -45,6 +45,13 @@
                     </select>
                 </div>
                 <div class="form-group">
+                    <label>Jabatan Pimpinan</label>
+                    <div>
+                        Optional : Isi jika ada
+                    </div>
+                    <input type="text" name="jabatan_pimpinan" class="form-control">
+                </div>
+                <div class="form-group">
                     <label>Role</label>
                     <select class="form-control" name="role">
                         <option value="superadmin">Superadmin</option>

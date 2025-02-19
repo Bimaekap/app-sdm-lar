@@ -1,5 +1,10 @@
 @extends('layouts.app')
 @section('title', 'Pengajuan Cuti')
+
+@push('styles')
+<link rel="stylesheet" href="{{ asset('assets/izitoast/dist/css/iziToast.min.css') }}">
+@endpush
+
 @section('content')
 
 <section class="section">
@@ -52,18 +57,25 @@
                                 @endforeach
                             </select>
                         </div>
-
-                        {{-- #README: Input Kepala Divisi --}}
-
+                        {{-- #TODO: Prioritas
+                        [] loop seluruh data kepala divisi yang terdaftar di database
+                        --}}
                         <div class="form-group">
                             <label>Kepala Divisi</label>
-                            <select class="form-control" name="jenis_cuti">
+                            <select class="form-control" name="kepala_divisi">
                                 {{-- Looping --}}
                                 <option>Pilih Kepala Divisi</option>
+                                @foreach ($users as $data)
+                                <option value="{{ $data->name }}">{{ $data->name }}</option>
+                                @endforeach
                             </select>
                         </div>
+                        {{-- --}}
                         <div class="form-group">
                             <label>File</label>
+                            <div>
+                                <label for="" style="font-size:.7rem">optional</label>
+                            </div>
                             <input type="file" name="file_pengajuan" class="form-control">
                         </div>
 
@@ -75,9 +87,16 @@
                             <input type="number" name="jumlah_cuti" class="form-control" placeholder="Hari" min="1">
                         </div>
                     </div>
-                    <div class="card-footer text-right">
-                        <button class="btn btn-primary mr-1" type="submit">Kirim</button>
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <button class="btn btn-primary" id="toastr-2">Kirim</button>
+                            </div>
+                        </div>
                     </div>
+                    {{-- <div class="card-footer text-right">
+                        <button class="btn btn-primary mr-1" type="submit">Kirim</button>
+                    </div> --}}
                 </div>
         </div>
         {{-- #TODO: Second Pick
@@ -108,6 +127,15 @@
 
     </div>
 </section>
-
+<script>
+    iziToast.show({
+    title: 'Hey',
+    message: 'What would you like to add?'
+});
+</script>
+@push('scripts')
+<script src="{{ asset('assets/izitoast/dist/js/iziToast.min.js') }}"></script>
+<script src="{{ asset('assets/js/page/modules-toastr.js') }}"></script>
+@endpush
 
 @endsection

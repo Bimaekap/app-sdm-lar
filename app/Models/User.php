@@ -67,16 +67,6 @@ class User extends Authenticatable
     {
         return $this->hasMany(CutiIzin::class, 'user_id');
     }
-    /**
-     * Get the user associated with the User
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function validasiCutiUser(): HasOne
-    {
-        return $this->hasOne(validasiCutiUser::class, 'foreign_key', 'local_key');
-    }
-
 /**
      * Get all of the pengajuanCutiUser for the User
      *
@@ -95,6 +85,17 @@ class User extends Authenticatable
     public function pengajuanIzinUser(): HasMany
     {
         return $this->hasMany(PengajuanIzinUser::class, 'users_id');
+    }
+
+    // #TODO: buat relationship untuk yang mengaju cuti dan tentukan siapa kepala divisi nya  
+  /**
+     * Get all of the approvePermohonanUser for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function validasiCutiUser(): HasMany
+    {
+        return $this->hasMany(validasiCutiUser::class, 'user_id');
     }
 }
 

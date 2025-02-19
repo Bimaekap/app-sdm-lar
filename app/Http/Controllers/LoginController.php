@@ -9,12 +9,10 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    /*
-        #TODO: Prioritas
-        [] buat validasi ketika gagal login, salah password, akun tidak ditemukan.
-    */
     public function login(LoginRequest $request): RedirectResponse
     {
+
+        $email = $request->old('email');
         $credentials = $request->validated();
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
@@ -34,7 +32,11 @@ class LoginController extends Controller
                 return redirect()->route('dashboard.dosen');
             }
         } else {
-            return back()->with('login', 'Email Dan Password salah');
+            return back()->withErrors(
+                [
+                    'message' => 'periksa kembali email dan password anda'
+                ]
+        );
         }
         return redirect()->route('dashboard')->with('message', 'berhasil login');
     }
